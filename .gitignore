@@ -1,0 +1,50 @@
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Eclipse
+/.classpath
+/.project
+/.settings
+
+# NetBeans
+/nbproject
+manifest.mf
+build.xml
+
+# vim
+.*.sw[a-p]
+
+# Mac
+*.DS_Store
+
+# Ant
+build.number
+
+# Maven
+/target
+<<<<<<< HEAD
+
+#Test
+/sinnlos
+
+
+# Documentation
+/doc/
+/documentation/
+
+# Stuff
+/stuff/*
+/src/main/resources/laf/*
+/uml/*
+/stuff/
+/plan.rtf
+/bin
+/repo
+/build/
+/dist/
+
+# Th3Shadowbroker
+Backup.zip

@@ -1,0 +1,10 @@
+name: XConomy
+main: net.th3shadowbroker.XConomy.main
+author: Th3Shadowbroker
+version: 1.0.0
+website: http://crafter629.de
+
+commands:
+    xcon:
+        description: All the admin stuff.
+        permission: XConomy.admin
