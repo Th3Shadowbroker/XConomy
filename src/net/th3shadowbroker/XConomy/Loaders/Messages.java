@@ -24,11 +24,14 @@ public class Messages {
         Language lang = loader.lang;
         
         //Money transfer
-        lang.setTextOnce( "MoneyTransferToSender" , "&2Transfer successfull (%AMOUNT% %SHORTNAME%)." );
-        lang.setTextOnce( "MoneyTransferToTarget" , "&2%SENDER% transferred %AMOUNT% to your account." );
-        
-        //Account created
+        lang.setTextOnce( "MoneyTransferToSender" , "&2Transfer successfull (%AMOUNT% %SHORTNAME%)" );
+        lang.setTextOnce( "MoneyTransferToTarget" , "&2%SENDER% transferred %AMOUNT% to your account" );
+
+        //Account messages
         lang.setTextOnce( "AccountCreated" , "&2Hey %PLAYER%, you're account has been created :)" );
+        lang.setTextOnce( "AccountNotFound" , "&cSorry but there is no account owned by %OWNER%" );
+        lang.setTextOnce( "AccountBalanceSet" , "&2%PLAYER%'s balance was set to %AMOUNT% %FULLNAME%" );
+        
         
     }
     

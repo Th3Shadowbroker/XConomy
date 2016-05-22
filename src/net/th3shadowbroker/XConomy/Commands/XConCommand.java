@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.Commands;
 
+import net.th3shadowbroker.XConomy.Commands.Arguments.XConSet;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.command.Command;
@@ -47,7 +48,11 @@ public class XConCommand implements CommandExecutor {
                         
                         //Set money argument
                         if ( args[0].equalsIgnoreCase( "set" ) )
-                        { }
+                        { 
+                          XConSet SetCommand = new XConSet();
+                          SetCommand.setVars( plugin , args , p );
+                          SetCommand.RunAction();
+                        }
                         
                         //Add money argument
                         if ( args[0].equalsIgnoreCase( "add" ) )

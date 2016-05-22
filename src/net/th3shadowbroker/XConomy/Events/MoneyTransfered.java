@@ -25,10 +25,17 @@ public class MoneyTransfered implements Listener {
         {
             
             e.getSender().sendMessage( loader.ChatPrefix() + loader.lang.getText( "MoneyTransferToSender" ).replaceAll( "%AMOUNT%" , String.valueOf( e.getAmount() )
-                                                                                                           .replaceAll( "%SHORTNAME%" , loader.Config.getString( "Currency.Shortname" ) )) );
+                                                                                                           .replaceAll( "%SHORTNAME%" , loader.Config.getString( "Currency.Shortname" ) )
+                                                                                                           .replaceAll( "%FULLNAME%" , loader.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
             
-            e.getTarget().sendMessage( loader.ChatPrefix() + loader.lang.getText( "MoneyTransferToTarget" ).replaceAll( "%AMOUNT%" , String.valueOf( e.getAmount() )
-                                                                                                           .replaceAll( "%SHORTNAME%" , loader.Config.getString( "Currency.Shortname" ) )) );
+            if ( e.getTarget().isOnline() )
+            {
+                
+                e.getTarget().sendMessage( loader.ChatPrefix() + loader.lang.getText( "MoneyTransferToTarget" ).replaceAll( "%AMOUNT%" , String.valueOf( e.getAmount() )
+                                                                                                               .replaceAll( "%SHORTNAME%" , loader.Config.getString( "Currency.Shortname" ) )
+                                                                                                               .replaceAll( "%FULLNAME%" , loader.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
+                
+            }
             
         }
     }

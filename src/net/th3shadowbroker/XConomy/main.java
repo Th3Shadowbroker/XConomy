@@ -1,11 +1,13 @@
 package net.th3shadowbroker.XConomy;
 
 import java.io.File;
+import net.th3shadowbroker.XConomy.API.Economy_XConomy;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Objects.Language;
+import net.th3shadowbroker.XConomy.Objects.Plugins;
 import net.th3shadowbroker.XConomy.System.Console;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +43,9 @@ public class main extends JavaPlugin {
         Console.write( "Loading language..." );
         lang = new Language( this , new File( this.getDataFolder() , "messages.yml" ) );
         loadMessages();
+        
+        //Console.write( "Loading payment service..." );
+        //setupService();
         
         Console.write( "Everything done !" );
         
@@ -96,6 +101,15 @@ public class main extends JavaPlugin {
         
         Messages messages = new Messages( this );
         
+    }
+    
+    //Setup vault
+    private void setupService()
+    {
+        if ( Plugins.VaultIsEnabled() )
+        {
+            Economy_XConomy service = new Economy_XConomy();
+        }
     }
     
     //Get console-prefix
