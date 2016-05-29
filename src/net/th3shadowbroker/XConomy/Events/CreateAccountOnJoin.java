@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.Events;
 
+import java.io.File;
 import net.th3shadowbroker.XConomy.API.AccountCreatedEvent;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Objects.Account;
@@ -27,7 +28,7 @@ public class CreateAccountOnJoin implements Listener {
     @EventHandler( priority = EventPriority.HIGHEST )
     public void onPlayerJoin( PlayerJoinEvent e )
     {
-        if ( plugin.Config.getBoolean( "Actions.CreateAccountOnJoin" ) == true && Account.accountExists( plugin , e.getPlayer() ) == false )
+        if ( plugin.Config.getBoolean( "Actions.CreateAccountOnJoin" ) == true && Account.accountExists( new File( plugin.getDataFolder(), "accounts.yml" ), e.getPlayer().getUniqueId() ) == false )
         {
             try {
                 

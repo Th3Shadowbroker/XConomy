@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.Loaders;
 
+import net.th3shadowbroker.XConomy.Commands.BalanceCommand;
 import net.th3shadowbroker.XConomy.Commands.XConCommand;
 import net.th3shadowbroker.XConomy.main;
 
@@ -27,6 +28,9 @@ public class Commands {
         
             //Command executor: /xcon <args>
             loader.getCommand( "xcon" ).setExecutor( new XConCommand( this ) );
+            
+            //Command executor: /balance [Player]
+            loader.getCommand( "balance" ).setExecutor( new BalanceCommand( this ) );
         
     }
     

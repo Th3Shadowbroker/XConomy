@@ -16,15 +16,20 @@ public class main extends JavaPlugin {
     
     private String ConsolePrefix = "[XConomy] ";
     private String ChatPrefix = "§b[XConomy] ";
+    
+    private static main instance;
     public Console Console;
+    
     public FileConfiguration Config;
     public Language lang;
-    
+
     //Load it up
     @Override
     public void onEnable()
     {
         
+        this.instance = this;
+
         Console = new Console( this );
         
         Console.write( "Loading config..." );
@@ -43,10 +48,7 @@ public class main extends JavaPlugin {
         Console.write( "Loading language..." );
         lang = new Language( this , new File( this.getDataFolder() , "messages.yml" ) );
         loadMessages();
-        
-        //Console.write( "Loading payment service..." );
-        //setupService();
-        
+   
         Console.write( "Everything done !" );
         
     }
@@ -102,7 +104,7 @@ public class main extends JavaPlugin {
         Messages messages = new Messages( this );
         
     }
-    
+
     //Setup vault
     private void setupService()
     {
@@ -126,6 +128,12 @@ public class main extends JavaPlugin {
         
         return this.ChatPrefix;
         
+    }
+    
+    //Return current instance
+    public static main getInstance()
+    {
+        return instance;
     }
     
 }
