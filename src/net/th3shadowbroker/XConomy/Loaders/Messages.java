@@ -36,6 +36,13 @@ public class Messages {
         lang.setTextOnce( "AccountInvalidAmount" , "&c%AMOUNT% is not a valid amount" );
         lang.setTextOnce( "AccountNotEnoughMoney" , "&cThere is not enough money on %PLAYER%'s account" );
         
+        //ATM messages
+        lang.setTextOnce( "ATMTitle" , "&e%OWNER%s account" );
+        lang.setTextOnce( "ATMAccountDescription" , "&2Current balance: %BALANCE%%SHORTNAME%" );
+        lang.setTextOnce( "ATMItemDeposit" , "&2Deposit" );
+        lang.setTextOnce( "ATMItemWithdraw" , "&cWithdraw" );
+        lang.setTextOnce( "ATMItemTransfer" , "&9Transfer" );
+        
         //User messages
         lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");
         lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: %BALANCE%");

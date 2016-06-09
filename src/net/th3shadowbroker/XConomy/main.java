@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy;
 
 import java.io.File;
 import net.th3shadowbroker.XConomy.API.Economy_XConomy;
+import net.th3shadowbroker.XConomy.Cache.PlayerCache;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
@@ -22,13 +23,15 @@ public class main extends JavaPlugin {
     
     public FileConfiguration Config;
     public Language lang;
+    
+    private PlayerCache cache;
 
     //Load it up
     @Override
     public void onEnable()
     {
         
-        this.instance = this;
+        instance = this;
 
         Console = new Console( this );
         
@@ -128,6 +131,12 @@ public class main extends JavaPlugin {
         
         return this.ChatPrefix;
         
+    }
+    
+    //Get current instances cache
+    public PlayerCache getCache()
+    {
+        return cache;
     }
     
     //Return current instance

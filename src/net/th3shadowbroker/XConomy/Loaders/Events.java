@@ -1,5 +1,7 @@
 package net.th3shadowbroker.XConomy.Loaders;
 
+import net.th3shadowbroker.XConomy.Cache.Events.AddEntryOnJoin;
+import net.th3shadowbroker.XConomy.Cache.Events.RemoveEntryOnQuit;
 import net.th3shadowbroker.XConomy.Events.CreateAccountOnJoin;
 import net.th3shadowbroker.XConomy.Events.MoneyTransfered;
 import net.th3shadowbroker.XConomy.main;
@@ -23,6 +25,16 @@ public class Events {
     {
         
         /*
+         *      Setup cache events   
+         */
+           
+            //Add player on join
+            loader.getServer().getPluginManager().registerEvents( new AddEntryOnJoin( this ) , loader);
+            
+            //Remove player on quit
+            loader.getServer().getPluginManager().registerEvents( new RemoveEntryOnQuit( this ) , loader);
+        
+        /*
          *      Setup all required events
          */
         
@@ -31,6 +43,7 @@ public class Events {
             
             //Account creation on join event
             loader.getServer().getPluginManager().registerEvents( new CreateAccountOnJoin( this ) , loader);
+ 
         
     }
     
