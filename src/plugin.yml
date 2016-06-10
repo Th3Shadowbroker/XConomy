@@ -8,7 +8,7 @@ commands:
     xcon:
         description: All the admin stuff.
         permission: XConomy.admin
-        usage: /xcon <info:set:add:del> [Player] [Amount]
+        usage: /xcon <info:set:add:del:create> [Player] [Amount]
         aliases: [xconomy, eco, money]
     balance:
         description: Check a players account-balance.

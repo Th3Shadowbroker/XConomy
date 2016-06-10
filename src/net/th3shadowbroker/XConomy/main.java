@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy;
 
 import java.io.File;
 import net.th3shadowbroker.XConomy.API.Economy_XConomy;
+import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
 import net.th3shadowbroker.XConomy.Cache.PlayerCache;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
@@ -22,6 +23,7 @@ public class main extends JavaPlugin {
     public Console Console;
     
     public FileConfiguration Config;
+    public ATMConfig ATMConfig;
     public Language lang;
     
     private PlayerCache cache;
@@ -32,7 +34,7 @@ public class main extends JavaPlugin {
     {
         
         instance = this;
-
+        cache = new PlayerCache();
         Console = new Console( this );
         
         Console.write( "Loading config..." );
@@ -51,6 +53,9 @@ public class main extends JavaPlugin {
         Console.write( "Loading language..." );
         lang = new Language( this , new File( this.getDataFolder() , "messages.yml" ) );
         loadMessages();
+        
+        Console.write( "Loading ATM's..." );
+        ATMConfig = new ATMConfig( this , "ATM" );
    
         Console.write( "Everything done !" );
         
@@ -132,7 +137,7 @@ public class main extends JavaPlugin {
         return this.ChatPrefix;
         
     }
-    
+   
     //Get current instances cache
     public PlayerCache getCache()
     {

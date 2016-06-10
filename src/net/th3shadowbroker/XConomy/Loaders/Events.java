@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.Loaders;
 
+import net.th3shadowbroker.XConomy.ATM.Events.BankCreation;
 import net.th3shadowbroker.XConomy.Cache.Events.AddEntryOnJoin;
 import net.th3shadowbroker.XConomy.Cache.Events.RemoveEntryOnQuit;
 import net.th3shadowbroker.XConomy.Events.CreateAccountOnJoin;
@@ -43,6 +44,13 @@ public class Events {
             
             //Account creation on join event
             loader.getServer().getPluginManager().registerEvents( new CreateAccountOnJoin( this ) , loader);
+            
+        /*
+         *      Setup ATM creation events 
+         */
+        
+            //BankCreation event
+            loader.getServer().getPluginManager().registerEvents( new BankCreation(this) , loader);
  
         
     }

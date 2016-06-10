@@ -37,9 +37,7 @@ public class PlayerCache
     //Remove cache-entry
     public void removeCacheEntry( XConomyPlayer entry ) throws NotInCacheException
     {
-        if ( CachedPlayers.contains( entry ) )
-        {
-            
+ 
             for ( XConomyPlayer player : CachedPlayers )
             {
                 if ( entry.getUUID().equals( player.getUUID() ) )
@@ -47,16 +45,32 @@ public class PlayerCache
                     
                     CachedPlayers.remove( player );
                     
-                    break;
+                    return;
                     
                 }
             }
-            
-        }   else    {
-            
+
             throw new NotInCacheException();
-            
+
+    }
+    
+    //Update an existing entry
+    public void updateCacheEntry( XConomyPlayer entry , CacheState newState ) throws NotInCacheException
+    {
+        
+        for ( XConomyPlayer player : CachedPlayers )
+        {
+            if ( entry.getUUID().equals( player.getUUID() ) && entry.getState() != newState )
+            {
+                
+                player.setState( newState );
+                return;
+                
+            }
         }
+        
+        throw new NotInCacheException();
+        
     }
     
     //Cache entry exists

@@ -47,6 +47,10 @@ public class Messages {
         lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");
         lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: %BALANCE%");
         
+        //System messages
+        lang.setTextOnce( "SystemATMExists" , "&cThere is already an ATM at this location" );
+        lang.setTextOnce( "SystemATMCreated" , "&2ATM created successfully at this location" );
+        
     }
     
 }

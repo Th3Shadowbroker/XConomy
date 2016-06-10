@@ -1,11 +1,11 @@
 package net.th3shadowbroker.XConomy.Commands;
 
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConAdd;
+import net.th3shadowbroker.XConomy.Commands.Arguments.XConCreate;
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConRemove;
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConSet;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.main;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -80,6 +80,15 @@ public class XConCommand implements CommandExecutor {
                           XConRemove RemoveCommand = new XConRemove();
                           RemoveCommand.setVars( plugin , args , loader , p );
                           RemoveCommand.RunAction();
+                          return true;
+                        }
+                        
+                        //Create argument fot ATM's
+                        if ( args[0].equalsIgnoreCase( "create" ) )
+                        {
+                          XConCreate BankCreateCommand = new XConCreate();
+                          BankCreateCommand.setVars( plugin , args , loader , p );
+                          BankCreateCommand.RunAction();
                           return true;
                         }
                           
