@@ -1,5 +1,8 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.th3shadowbroker.XConomy.Addons.OverrideManager.OverrideType;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.Loaders.Events;
@@ -45,10 +48,26 @@ public class OpenATMInterface implements Listener
                 
                 if ( plugin.ATMConfig.ATMExists( cBlock ) )
                 {
-                    ATMInterface test = new DefaultATMInterface( p );
+//                    if ( plugin.Overrides.GetOverride( OverrideType.ATM_INTERFACE ) != null )                    
+//                    {
+//                      
+//                        try {
+//                            
+//                            ATMInterface InterfaceOverride = (ATMInterface) plugin.Overrides.GetOverride( OverrideType.ATM_INTERFACE ).GetOverride().newInstance();
+//                       
+//                        } catch ( Exception  ex ) {
+//                            
+//                            Logger.getLogger(OpenATMInterface.class.getName()).log(Level.SEVERE, null, ex);
+//                            
+//                        }
+//                        
+//                    } else {
+                        
+                        ATMInterface test = new DefaultATMInterface( p );
                     
-                    test.OpenTo( p , true );
-                    
+                        test.OpenTo( p , true );
+                        
+//                    }
                 }
                             
             }

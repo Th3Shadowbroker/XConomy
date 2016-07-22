@@ -50,11 +50,11 @@ public class GUIItemAction implements Listener {
 
                 ev.setCancelled( true );
 
-                } else {
+            } else {
 
                 ev.setCancelled( false );
 
-                }
+            }
             
         }
     }

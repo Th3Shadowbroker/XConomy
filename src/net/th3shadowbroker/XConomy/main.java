@@ -3,6 +3,7 @@ package net.th3shadowbroker.XConomy;
 import java.io.File;
 import net.th3shadowbroker.XConomy.API.Economy_XConomy;
 import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
+import net.th3shadowbroker.XConomy.Addons.OverrideManager;
 import net.th3shadowbroker.XConomy.Cache.PlayerCache;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
@@ -27,6 +28,7 @@ public class main extends JavaPlugin {
     public Language lang;
     
     private PlayerCache cache;
+    public OverrideManager Overrides;
 
     //Load it up
     @Override
