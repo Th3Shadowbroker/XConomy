@@ -25,7 +25,7 @@ public class PlayerCache
         if ( !CachedPlayers.contains( entry ) )
         {
             
-            CachedPlayers.add( entry );
+            CachedPlayers.add( entry ); System.out.println( "[AncientCore] " + entry.getUUID() );
             
         }   else    {
             
@@ -43,7 +43,7 @@ public class PlayerCache
                 if ( entry.getUUID().equals( player.getUUID() ) )
                 {
                     
-                    CachedPlayers.remove( player );
+                    CachedPlayers.remove( player ); System.out.println( "[AncientCore] " + entry.getUUID() );
                     
                     return;
                     
@@ -60,7 +60,7 @@ public class PlayerCache
         
         for ( XConomyPlayer player : CachedPlayers )
         {
-            if ( entry.getUUID().equals( player.getUUID() ) && entry.getState() != newState )
+            if ( entry.getUUID().equals( player.getUUID() ) )
             {
                 
                 player.setState( newState );

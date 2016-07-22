@@ -12,18 +12,35 @@ public class XConCreate extends CommandArgument {
         {    
             try {
                 
-                if (arguments[1].equalsIgnoreCase( "bank" ) )
+                if ( arguments.length != 1 )
                 {
-                    if ( plugin.getCache().getCacheEntry( new XConomyPlayer( player ) ).getState() == CacheState.NORMAL )
-                    {
-                        plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.WAIT_CREATE_BANK );
-                        player.sendMessage( plugin.ChatPrefix() + "§2Rigt-click on the bank you want do create" );
-                    }
-                    else
-                    {
-                        plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.NORMAL );
-                        player.sendMessage( plugin.ChatPrefix() + "§cBank creation canceled" );
-                    }
+                   
+                        if (arguments[1].equalsIgnoreCase( "bank" ) )
+                        {
+
+                            if ( plugin.getCache().getCacheEntry( new XConomyPlayer( player ) ).getState() == CacheState.NORMAL )
+                            {
+
+                                plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.WAIT_CREATE_BANK );
+                                player.sendMessage( plugin.ChatPrefix() + "§2Rigt-click on the bank you want do create" );
+
+                            } else {
+
+                                plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.NORMAL );
+                                player.sendMessage( plugin.ChatPrefix() + "§cBank creation cancelled" );
+
+                            }
+
+                        } else {
+
+                        player.sendMessage( plugin.ChatPrefix() + "§cPlease use §9/xcon create <bank>" );
+
+                        }
+                        
+                } else {
+                    
+                    player.sendMessage( plugin.ChatPrefix() + "§cPlease use §9/xcon create <bank>" );
+                    
                 }
                 
             } catch ( Exception ex ) {

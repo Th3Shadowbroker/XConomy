@@ -8,7 +8,6 @@ import net.th3shadowbroker.XConomy.ATM.ATM;
 import net.th3shadowbroker.XConomy.Exceptions.ATMExistsException;
 import net.th3shadowbroker.XConomy.Exceptions.ATMNotExistsException;
 import net.th3shadowbroker.XConomy.main;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,22 +35,20 @@ public class ATMConfig {
     //Create an new ATM
     public void addATM( ATM atm ) throws ATMExistsException
     {
-        
+
         String key = createATMKey( atm );
-                
-        if ( config.getStringList( key ) != null )
+        
+        if ( config.getString( key + ".X" ) == null )
         {
             
             config.set( key + ".X" , atm.getLocation().getBlockX() );
             config.set( key + ".Y" , atm.getLocation().getBlockY() );
             config.set( key + ".Z" , atm.getLocation().getBlockZ() );
             config.set( key + ".W" , atm.getLocation().getWorld().getName() );
-         
-            this.save();
             
-        }
-        else
-        {
+            save();
+            
+        } else {
             
             throw new ATMExistsException();
             
@@ -65,76 +62,69 @@ public class ATMConfig {
         
         String key = createATMKey( atm );
         
-        if ( config.getStringList( key )!= null )
+        if ( config.getStringList( key ) != null )
         {
             
-            config.set( key , null );
-            this.save();
+            config.set( key + ".X" , null );
+            config.set( key + ".Y" , null );
+            config.set( key + ".Z" , null );
+            config.set( key + ".W" , null );
             
-        }
-        else
-        {
+            save();
+            
+        } else {
             
             throw new ATMNotExistsException();
             
         }
+        
     }
     
     //ATM exists
     public boolean ATMExists( Location location )
     {
-        try {
-            
-            this.getATM( location );
-            return true;
-            
-        } catch (ATMNotExistsException ex) {
-            
-            return false;
-            
-        }
+  
+            return config.getString( createATMKey( location ) + ".X" ) != null;
+
     }
     
     //Get an existing ATM
     public ATM getATM( Location location ) throws ATMNotExistsException
     {
 
-        String needle = createATMKey( location );
+        String key = createATMKey( location );
         
-        for ( String ATMEntry : config.getStringList( "ATM" ) )
+        if ( config.getString( key + ".X" ) != null )
         {
-
-            String haystack = ATMEntry;
             
-            if ( needle.equals( haystack ) )
-            {
-                
-                return new ATM( new Location(
-                                    Bukkit.getWorld( config.getString( needle + ".W" ) ),
-                                    config.getDouble( needle + ".X" ),
-                                    config.getDouble( needle + ".Y" ),
-                                    config.getDouble( needle + ".Z" )
-                                ));
-                
-            }
-        }
+            return new ATM( location );
+            
+        } else {
         
-        throw new ATMNotExistsException();
+            throw new ATMNotExistsException();
+            
+        }
         
     }
     
     //Create an ATMS's key used as it's name
     public static String createATMKey( ATM atm )
     {
-        String tmp = "ATM." + atm.getLocation().getWorld().getName()+ atm.getLocation().getX() + atm.getLocation().getY() + atm.getLocation().getZ();
-        return tmp.replaceAll( " " , "" );
+        String tmp = "ATM." + atm.getLocation().getWorld().getName() + String.valueOf( atm.getLocation().getBlockX() + "#" )
+                                                                     + String.valueOf( atm.getLocation().getBlockY() + "#" )
+                                                                     + String.valueOf( atm.getLocation().getBlockZ() + "#" )
+                                                                    ;
+        return tmp;
     }
     
     //Create an ATMS's key used as it's location
     public static String createATMKey( Location loc )
     {
-        String tmp = "ATM." + loc.getWorld().getName()+ loc.getX() + loc.getY() + loc.getZ();
-        return tmp.replaceAll( " " , "" );
+        String tmp = "ATM." + loc.getWorld().getName() + String.valueOf( loc.getBlockX() + "#" )
+                                                       + String.valueOf( loc.getBlockY() + "#" )
+                                                       + String.valueOf( loc.getBlockZ() + "#" )
+                                                                    ;
+        return tmp;
     }
     
     //Save config

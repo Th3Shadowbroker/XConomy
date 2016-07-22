@@ -3,6 +3,7 @@ package net.th3shadowbroker.XConomy.ATM.Events;
 import net.th3shadowbroker.XConomy.ATM.ATM;
 import net.th3shadowbroker.XConomy.Cache.CacheState;
 import net.th3shadowbroker.XConomy.Exceptions.ATMExistsException;
+import net.th3shadowbroker.XConomy.Exceptions.ATMNotExistsException;
 import net.th3shadowbroker.XConomy.Exceptions.NotInCacheException;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Objects.XConomyPlayer;
@@ -15,13 +16,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class BankCreation implements Listener {
+public class BankDeletion implements Listener {
     
     private final Events loader;
     private final main plugin;
     
     //Construction
-    public BankCreation( Events loaderClass )
+    public BankDeletion( Events loaderClass )
     {
         
         this.loader = loaderClass;
@@ -32,9 +33,9 @@ public class BankCreation implements Listener {
     
     //Event to create banks
     @EventHandler
-    public void createBank( PlayerInteractEvent ev )
+    public void removeBank( PlayerInteractEvent ev )
     {
-        if ( plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState() == CacheState.WAIT_CREATE_BANK ){
+        if ( plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState() == CacheState.WAIT_DELETION ){
             
             if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK )
             {
@@ -47,22 +48,22 @@ public class BankCreation implements Listener {
                 try {
                 
                     
-                    if ( !plugin.ATMConfig.ATMExists( cBlock ) )
+                    if ( plugin.ATMConfig.ATMExists( cBlock ) )
                     {
 
                         ATM atm = new ATM( cBlock );
-                        plugin.ATMConfig.addATM( atm );
-                        p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMCreated" ) );
+                        plugin.ATMConfig.removeATM( atm );
+                        p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMRemoved" ) );
                         plugin.getCache().updateCacheEntry( new XConomyPlayer( p ) , CacheState.NORMAL );
 
                     } else {
 
-                        p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMExists" ) );
+                        p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMNotFound" ) );
                         plugin.getCache().updateCacheEntry( new XConomyPlayer( p ) , CacheState.NORMAL );
 
                     }
                     
-                } catch ( ATMExistsException | NotInCacheException ex ) {
+                } catch ( NotInCacheException | ATMNotExistsException ex ) {
                     
                     p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemUniErrMsg" ) );
                     ex.printStackTrace();

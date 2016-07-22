@@ -3,8 +3,10 @@ package net.th3shadowbroker.XConomy.Commands.Arguments;
 import java.io.File;
 import net.th3shadowbroker.XConomy.Objects.Account;
 import net.th3shadowbroker.XConomy.Blueprints.CommandArgument;
+import net.th3shadowbroker.XConomy.Cache.CacheState;
 import net.th3shadowbroker.XConomy.Exceptions.InvalidAmountException;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
+import net.th3shadowbroker.XConomy.Objects.XConomyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -65,13 +67,52 @@ public class XConRemove extends CommandArgument {
                 
             } catch ( Exception ex ) {
             
-                player.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon remove:del <Player> <Amount>" );
+                player.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon remove:del [Player:Bank] [Amount]" );
                 
             }
             
+        } else if( arguments.length == 2 ){
+            
+            try {
+                
+                if ( arguments[1].equalsIgnoreCase( "bank" ) )
+                {
+                    
+                    if ( player.hasPermission( "XConomy.admin" ) )
+                    {
+                        
+                        XConomyPlayer currentState = plugin.getCache().getCacheEntry( new XConomyPlayer( player ) );
+                        
+                        if ( currentState.getState() == CacheState.NORMAL )
+                        {
+                            
+                            plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.WAIT_DELETION );
+                            player.sendMessage( plugin.ChatPrefix() + "§cRigt-click on the bank you want do remove" );
+                            
+                        } else {
+                            
+                            plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.NORMAL );
+                            player.sendMessage( plugin.ChatPrefix() + "§cBank deletion canceled" );
+                            
+                        }
+                        
+                    }
+                    
+                } else {
+                    
+                    throw new Exception();
+                    
+                }
+                
+            } catch ( Exception ex ) {
+                
+                player.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon remove:del [Player:Bank] [Amount]" );
+                
+            }
+        
         } else {
             
-            player.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon remove:del <Player> <Amount>" );
+            player.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon remove:del [Player:Bank] [Amount]" );
             
         }
         

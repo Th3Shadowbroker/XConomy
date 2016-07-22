@@ -48,8 +48,12 @@ public class Messages {
         lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: %BALANCE%");
         
         //System messages
+        lang.setTextOnce( "SystemUniErrMsg" , "&cThere was an error. See console." );
+        lang.setTextOnce( "SystemATMBlockDestruction" , "&cATM's can't be destroyed" );
         lang.setTextOnce( "SystemATMExists" , "&cThere is already an ATM at this location" );
         lang.setTextOnce( "SystemATMCreated" , "&2ATM created successfully at this location" );
+        lang.setTextOnce( "SystemATMRemoved" , "&cATM removed successfully from this location" );
+        lang.setTextOnce( "SystemATMNotFound" , "&cATM not found" );
         
     }
     

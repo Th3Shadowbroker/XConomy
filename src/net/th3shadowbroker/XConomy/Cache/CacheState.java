@@ -16,6 +16,9 @@ public enum CacheState
     //Waiting for transfer terminal creation
     WAIT_CREATE_TERMINAL,
     
+    //Waiting for deletion
+    WAIT_DELETION,
+    
     //Something else
     OTHER
     
