@@ -1,10 +1,8 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.th3shadowbroker.XConomy.Addons.OverrideManager.OverrideType;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
+import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Location;
@@ -64,7 +62,7 @@ public class OpenATMInterface implements Listener
 //                    } else {
                         
                         ATMInterface test = new DefaultATMInterface( p );
-                    
+                        GUIItemBlocker testBlocker = new GUIItemBlocker( this.loader, test );
                         test.OpenTo( p , true );
                         
 //                    }

@@ -44,7 +44,7 @@ public class GUIItemAction implements Listener {
                 
                 if ( Extension != null )
                 {
-                    Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface );
+                    Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface, Item );
                     Extension.Run();
                 }
 

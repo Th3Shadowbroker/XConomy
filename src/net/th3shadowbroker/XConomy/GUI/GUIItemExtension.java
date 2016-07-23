@@ -8,6 +8,7 @@ public abstract class GUIItemExtension
     
     public Player Player;
     public ATMInterface CurrentInterface;
+    public GUIItemStack CurrentItem;
     
     public GUIItemExtension()
     {
@@ -16,12 +17,14 @@ public abstract class GUIItemExtension
         
     }
     
-    public void UpdateInformations( Player player, ATMInterface cInterface )
+    public void UpdateInformations( Player player, ATMInterface cInterface, GUIItemStack item )
     {
         
         this.Player = player;
         
         this.CurrentInterface = cInterface;
+        
+        this.CurrentItem = item;
         
     }
     

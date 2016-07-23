@@ -31,19 +31,7 @@ public class GUIItemBlocker implements Listener {
         if ( e.getInventory().getName().equals( menu.getInventory().getName() ) )
         {
             
-            try {
-            
-                //Cancel action
-                if ( e.isCancelled() == false ) //Cancelled via GUIItemAction ?
-                {
-                    e.setCancelled( true ); //Cancel
-                }
-                
-            } catch ( Exception ex ) {
-                
-                //Nothing to cancel
-                
-            }   
+            e.setCancelled(true);
             
         }
         

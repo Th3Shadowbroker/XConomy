@@ -103,6 +103,14 @@ public abstract class ATMInterface
         
     }
     
+    //Override default-size
+    public void SetSize( int size )
+    {
+        
+        this.Interface = Bukkit.createInventory( null , size, "§2ATM" );
+        
+    }
+    
     //Set custom spacer
     public void SetCustomSpacer( ItemStack Spacer )
     {
