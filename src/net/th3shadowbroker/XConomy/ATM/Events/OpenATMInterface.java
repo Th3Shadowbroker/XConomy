@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class OpenATMInterface implements Listener
 {
@@ -26,7 +27,7 @@ public class OpenATMInterface implements Listener
         this.plugin = loaderClass.loader;
         
         this.loader = loaderClass;
-        
+  
     }
     
     //The Events
@@ -38,7 +39,7 @@ public class OpenATMInterface implements Listener
         
         if ( p.hasPermission( "XConomy.useatm" ) )
         {
-            if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK )
+            if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK && ev.getHand().equals( EquipmentSlot.HAND ) )
             {
                 
                 Block clickedBlock = ev.getClickedBlock();
@@ -46,26 +47,11 @@ public class OpenATMInterface implements Listener
                 
                 if ( plugin.ATMConfig.ATMExists( cBlock ) )
                 {
-//                    if ( plugin.Overrides.GetOverride( OverrideType.ATM_INTERFACE ) != null )                    
-//                    {
-//                      
-//                        try {
-//                            
-//                            ATMInterface InterfaceOverride = (ATMInterface) plugin.Overrides.GetOverride( OverrideType.ATM_INTERFACE ).GetOverride().newInstance();
-//                       
-//                        } catch ( Exception  ex ) {
-//                            
-//                            Logger.getLogger(OpenATMInterface.class.getName()).log(Level.SEVERE, null, ex);
-//                            
-//                        }
-//                        
-//                    } else {
-                        
-                        ATMInterface test = new DefaultATMInterface( p );
+  
+                        DefaultATMInterface test = new DefaultATMInterface(p);
                         GUIItemBlocker testBlocker = new GUIItemBlocker( this.loader, test );
                         test.OpenTo( p , true );
-                        
-//                    }
+
                 }
                             
             }

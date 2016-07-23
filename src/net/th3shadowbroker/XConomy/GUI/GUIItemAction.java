@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class GUIItemAction implements Listener {
  
@@ -29,34 +30,33 @@ public class GUIItemAction implements Listener {
         this.ATMInterface = ATMInterface;
         
         Bukkit.getPluginManager().registerEvents( this , XConomy );
-        
+
     }
     
     //The Event
     @EventHandler( priority = EventPriority.NORMAL )
     public void GUIActionEvent( InventoryClickEvent ev )
     {
-        if ( ev.getInventory().getName().equals( ATMInterface.getInventory().getName() ) )
-        {
-            
-            if ( ev.getCurrentItem().getItemMeta().getDisplayName().equals( Item.getName() ) )
+            if ( ev.getCurrentItem() instanceof ItemStack )
             {
-                
-                if ( Extension != null )
+                if ( ev.getInventory().getName().equals( ATMInterface.getInventory().getName() ) )
                 {
-                    Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface, Item );
-                    Extension.Run();
-                }
 
-                ev.setCancelled( true );
+                    if ( ev.getCurrentItem().getItemMeta().getDisplayName().equals( Item.getName() ) )
+                    {
 
-            } else {
+                            ev.setCancelled( true );
 
-                ev.setCancelled( false );
+                            if ( Extension != null )
+                            {
+                                Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface, Item );
+                                Extension.Run();
+                            }
 
+                    }
+
+               }
             }
-            
-        }
     }
     
 }

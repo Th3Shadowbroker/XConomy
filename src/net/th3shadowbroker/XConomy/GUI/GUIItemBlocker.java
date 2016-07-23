@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class GUIItemBlocker implements Listener {
     
@@ -25,16 +26,19 @@ public class GUIItemBlocker implements Listener {
     }
     
     @EventHandler( priority = EventPriority.LOW )
-    public void blockItemInput( InventoryClickEvent e )
+    public void blockItemInput( InventoryClickEvent ev )
     {
-        
-        if ( e.getInventory().getName().equals( menu.getInventory().getName() ) )
+        if ( ev.getCurrentItem() instanceof ItemStack )
         {
-            
-            e.setCancelled(true);
-            
+            if ( ev.getInventory().getName().equals( menu.getInventory().getName() ) )
+            {
+                if ( !ev.isCancelled() )
+                {
+                    ev.setCancelled( true );
+                }
+            }
         }
-        
+
     }
     
 }

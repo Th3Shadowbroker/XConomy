@@ -40,9 +40,13 @@ public class Messages {
         //ATM messages
         lang.setTextOnce( "ATMTitle" , "&e%OWNER%s account" );
         lang.setTextOnce( "ATMAccountDescription" , "&2Current balance: %BALANCE%%SHORTNAME%" );
+        
         lang.setTextOnce( "ATMItemDeposit" , "&2Deposit" );
         lang.setTextOnce( "ATMItemCustomDeposit" , "&2Custom deposit" );
+        
         lang.setTextOnce( "ATMItemWithdraw" , "&cWithdraw" );
+        lang.setTextOnce( "ATMItemCustomWithdraw" , "&cCustom withdraw" );
+        
         lang.setTextOnce( "ATMItemTransfer" , "&9Transfer" );
         
         //User messages

@@ -4,6 +4,7 @@ import java.io.File;
 import net.th3shadowbroker.XConomy.API.Economy_XConomy;
 import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
 import net.th3shadowbroker.XConomy.Addons.OverrideManager;
+import net.th3shadowbroker.XConomy.Bank.Bank;
 import net.th3shadowbroker.XConomy.Cache.PlayerCache;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
@@ -28,6 +29,7 @@ public class main extends JavaPlugin {
     public Language lang;
     
     private PlayerCache cache;
+    public Bank BankManager;
     public OverrideManager Overrides;
 
     //Load it up
@@ -55,6 +57,9 @@ public class main extends JavaPlugin {
         Console.write( "Loading language..." );
         lang = new Language( this , new File( this.getDataFolder() , "messages.yml" ) );
         loadMessages();
+        
+        Console.write( "Loading bank-runtime..." );
+        BankManager = new Bank( this, new File( this.getDataFolder(), "bank.yml" ) );
         
         Console.write( "Loading ATM's..." );
         ATMConfig = new ATMConfig( this , "ATM" );

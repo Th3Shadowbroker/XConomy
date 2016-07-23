@@ -19,6 +19,7 @@ public class Account {
     private final FileConfiguration accounts;
     private final Plugin plugin;
     private final File accountsFile;
+    private final main XConomy;
     
     //Construction
     public Account( Plugin plugin , Player p )
@@ -31,6 +32,8 @@ public class Account {
         this.accountsFile = new File( plugin.getDataFolder() , "accounts.yml" );
         
         this.accounts = YamlConfiguration.loadConfiguration( accountsFile );
+        
+        this.XConomy = main.getInstance();
         
         this.setup();
         
@@ -48,6 +51,8 @@ public class Account {
         
         this.accounts = YamlConfiguration.loadConfiguration( accountsFile );
         
+        this.XConomy = main.getInstance();
+        
         this.setup();
         
     }
@@ -61,7 +66,7 @@ public class Account {
             {
                 
                 accounts.set( owner.getUniqueId().toString() , 0.00 );
-                
+                XConomy.BankManager.CreateBankAccount( owner );
                 this.save();
 
             } 
