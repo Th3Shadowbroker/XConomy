@@ -2,7 +2,9 @@ package net.th3shadowbroker.XConomy.Defaults;
 
 import java.util.ArrayList;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
+import net.th3shadowbroker.XConomy.Defaults.CalcInterface.DotItemAction;
 import net.th3shadowbroker.XConomy.Defaults.CalcInterface.NumberItemAction;
+import net.th3shadowbroker.XConomy.Defaults.CalcInterface.OKItemAction;
 import net.th3shadowbroker.XConomy.GUI.GUIItemAction;
 import net.th3shadowbroker.XConomy.GUI.GUIItemStack;
 import net.th3shadowbroker.XConomy.main;
@@ -108,8 +110,10 @@ public class DefaultCalcInterface extends ATMInterface
         /* Confirm   */    GUIItemStack L4I3 = new GUIItemStack( new ItemStack( Material.WOOL, 1,(short) 13 ), "§2OK", null, 41); Elements.add(L4I3);
         
         //Line four / Options line actions
-        /* Add number extension to 0 */     GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction() );
-                
+        /* Add number extension to 0 */         GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction() );
+        /* Add ok extension to ok buton */      GUIItemAction L4A3 = new GUIItemAction( L4I3, this, new OKItemAction() );      
+        /* Add dot extension to dot buton */    GUIItemAction L4A1 = new GUIItemAction( L4I1, this, new DotItemAction() );
+        
         //Add items to inerface
         this.AddElements( Elements );
         
@@ -128,6 +132,24 @@ public class DefaultCalcInterface extends ATMInterface
     {
         
         return Double.parseDouble( this.getInventory().getItem( 4 ).getItemMeta().getDisplayName() );
+        
+    }
+    
+    //Update and insert string
+    public void ForceUpdateAmount( String updatedAmount )
+    {
+        
+        ItemStack CurrentAmount = this.getInventory().getItem( 4 );
+        String CurrentName = CurrentAmount.getItemMeta().getDisplayName();
+        
+        //Creating an updated amount-display item
+        ItemStack NewAmount = CurrentAmount;
+        ItemMeta NewAmountMeta = CurrentAmount.getItemMeta();
+            
+        NewAmountMeta.setDisplayName( String.valueOf( NewAmountMeta.getDisplayName() ) + updatedAmount );
+        NewAmount.setItemMeta( NewAmountMeta );
+            
+        this.AddElement( new GUIItemStack( NewAmount, NewAmount.getItemMeta().getDisplayName(), null, 4 ) );
         
     }
     
