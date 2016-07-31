@@ -1,7 +1,6 @@
 package net.th3shadowbroker.XConomy;
 
 import java.io.File;
-import net.th3shadowbroker.XConomy.API.Economy_XConomy;
 import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
 import net.th3shadowbroker.XConomy.Addons.OverrideManager;
 import net.th3shadowbroker.XConomy.Bank.Bank;
@@ -13,6 +12,7 @@ import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.Objects.Plugins;
 import net.th3shadowbroker.XConomy.System.Console;
+import net.th3shadowbroker.XConomy.Vault.VaultPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -63,6 +63,9 @@ public class main extends JavaPlugin {
         
         Console.write( "Loading ATM's..." );
         ATMConfig = new ATMConfig( this , "ATM" );
+        
+        Console.write( "Checking for vault..." );
+        setupService();
    
         Console.write( "Everything done !" );
         
@@ -125,7 +128,7 @@ public class main extends JavaPlugin {
     {
         if ( Plugins.VaultIsEnabled() )
         {
-            Economy_XConomy service = new Economy_XConomy();
+            VaultPlugin VaultLoader = new VaultPlugin();
         }
     }
     

@@ -39,9 +39,10 @@ public class OpenATMInterface implements Listener
         
         if ( p.hasPermission( "XConomy.useatm" ) )
         {
-            if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK && ev.getHand().equals( EquipmentSlot.HAND ) )
+
+            if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK && ev.getHand() == EquipmentSlot.HAND )
             {
-                
+
                 Block clickedBlock = ev.getClickedBlock();
                 Location cBlock = new Location( clickedBlock.getWorld(), clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ() );
                 

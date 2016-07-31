@@ -3,6 +3,7 @@ package net.th3shadowbroker.XConomy.Defaults;
 import java.util.ArrayList;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoDeposit;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoWithdraw;
+import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomDeposit;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemAction;
 import net.th3shadowbroker.XConomy.GUI.GUIItemStack;
@@ -47,7 +48,7 @@ public class DefaultATMInterface extends ATMInterface
             GUIItemAction DepositAction = new GUIItemAction( DepositItem, this, null );
 
             GUIItemStack CustomDepositItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomDeposit" ), null , 1, 8 ); Elements.add( CustomDepositItem );
-            GUIItemAction CustomDepositAction = new GUIItemAction( DepositItem, this, null );
+            GUIItemAction CustomDepositAction = new GUIItemAction( CustomDepositItem, this, new DefaultCustomDeposit() );
 
             int DSCounter = 5;
 
@@ -125,7 +126,7 @@ public class DefaultATMInterface extends ATMInterface
                     WDCounter += 25;
 
                 }
-
+  
             }
 
         

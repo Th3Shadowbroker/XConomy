@@ -16,7 +16,7 @@ public class GUIItemAction implements Listener {
     private final GUIItemExtension Extension;
     private final main XConomy;
     private final ATMInterface ATMInterface;
-    
+
     //Construction
     public GUIItemAction( GUIItemStack TriggerItem, ATMInterface ATMInterface, GUIItemExtension Extension )
     {
@@ -28,16 +28,17 @@ public class GUIItemAction implements Listener {
         this.XConomy = main.getInstance();
         
         this.ATMInterface = ATMInterface;
-        
+
         Bukkit.getPluginManager().registerEvents( this , XConomy );
 
     }
-    
+ 
     //The Event
     @EventHandler( priority = EventPriority.NORMAL )
     public void GUIActionEvent( InventoryClickEvent ev )
     {
-            if ( ev.getCurrentItem() instanceof ItemStack )
+   
+            if ( ev.getCurrentItem() instanceof ItemStack && ev.getCursor() != null )
             {
                 if ( ev.getInventory().getName().equals( ATMInterface.getInventory().getName() ) )
                 {

@@ -1,65 +1,37 @@
-package net.th3shadowbroker.XConomy.API;
+package net.th3shadowbroker.XConomy.Vault;
 
 import java.util.List;
-import net.milkbowl.vault.economy.AbstractEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import net.th3shadowbroker.XConomy.Objects.Account;
+import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicePriority;
 
-public class Economy_XConomy extends AbstractEconomy {
+public class XConVault implements Economy
+{
 
-    //Constuction
-    public void VaultLoader()
-    {
-        System.out.println( "[XCon Vault-Service] Enabling sevice..." );
-        Plugin Vault = Bukkit.getPluginManager().getPlugin( "Vault" );
-        Bukkit.getServicesManager().register(Economy.class, this , Vault , ServicePriority.Normal);
-        System.out.println( "[XCon Vault-Service] Service has been enabled..." );
-    }
+    private main XConomy = main.getInstance();
     
-    //Is XConomy enabled ?
     @Override
     public boolean isEnabled() {
         
-        if ( Bukkit.getServer().getPluginManager().isPluginEnabled( "XConomy" ) )
-        {
-            
-            return true;
-            
-        } else {
-            
-            return false;
-            
-        }
-
+        return Bukkit.getPluginManager().isPluginEnabled( XConomy );
+        
     }
 
-    //Get XConomys name
     @Override
     public String getName() {
         
-        try {
-            
-            Plugin XConomy = Bukkit.getServer().getPluginManager().getPlugin( "XConomy" );
-            
-            return XConomy.getDescription().getName();
+        return XConomy.getDescription().getName();
         
-        } catch ( Exception ex ) {
-            
-            return null;
-            
-        }
-            
     }
 
-    //XConomy has bank support ?
+    //That's true
     @Override
     public boolean hasBankSupport() {
         
-        return false;
+        return true;
         
     }
 
@@ -83,14 +55,22 @@ public class Economy_XConomy extends AbstractEconomy {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Check account by name
     @Override
     public boolean hasAccount(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        OfflinePlayer p = Bukkit.getOfflinePlayer( string );
+               
+        return Account.accountExists( p.getUniqueId() );
+        
     }
 
+    //Check account by offline-player
     @Override
     public boolean hasAccount(OfflinePlayer op) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return Account.accountExists( op.getUniqueId() );
+        
     }
 
     @Override
@@ -103,14 +83,27 @@ public class Economy_XConomy extends AbstractEconomy {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Get balance by name
     @Override
     public double getBalance(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        OfflinePlayer p = Bukkit.getOfflinePlayer( string );
+        
+        Account pAcc = new Account( XConomy, p.getPlayer() );
+        
+        return pAcc.getMoney();
+        
     }
 
+    //Get balance by offline player
     @Override
     public double getBalance(OfflinePlayer op) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Account pAcc = new Account( XConomy, op );
+        
+        return pAcc.getMoney();
+        
+        
     }
 
     @Override
@@ -123,14 +116,26 @@ public class Economy_XConomy extends AbstractEconomy {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Has enough by string
     @Override
     public boolean has(String string, double d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        OfflinePlayer p = Bukkit.getOfflinePlayer( string );
+        
+        Account pAcc = new Account( XConomy, p );
+        
+        return pAcc.hasEnough( d );
+        
     }
 
+    //Has enough by offline-player
     @Override
     public boolean has(OfflinePlayer op, double d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Account pAcc = new Account( XConomy, op );
+        
+        return pAcc.hasEnough( d );
+        
     }
 
     @Override
@@ -245,22 +250,34 @@ public class Economy_XConomy extends AbstractEconomy {
 
     @Override
     public boolean createPlayerAccount(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Already automated
+        return true;
+        
     }
 
     @Override
     public boolean createPlayerAccount(OfflinePlayer op) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Already automated
+        return true;
+        
     }
 
     @Override
     public boolean createPlayerAccount(String string, String string1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Already automated
+        return true;
+        
     }
 
     @Override
     public boolean createPlayerAccount(OfflinePlayer op, String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Already automated
+        return true;
+        
     }
     
 }

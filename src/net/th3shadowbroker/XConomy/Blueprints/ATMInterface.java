@@ -111,6 +111,14 @@ public abstract class ATMInterface
         
     }
     
+    //Override default-informations
+    public void OverrideDefaults( String MenuTitle, int size )
+    {
+        
+        this.Interface = Bukkit.createInventory( null , size, MenuTitle );
+        
+    }
+    
     //Set custom spacer
     public void SetCustomSpacer( ItemStack Spacer )
     {

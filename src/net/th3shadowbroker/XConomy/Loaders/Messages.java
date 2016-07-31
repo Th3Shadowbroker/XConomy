@@ -48,6 +48,7 @@ public class Messages {
         lang.setTextOnce( "ATMItemCustomWithdraw" , "&cCustom withdraw" );
         
         lang.setTextOnce( "ATMItemTransfer" , "&9Transfer" );
+        lang.setTextOnce( "ATMItemCustomTransfer" , "&9Custom transfer" );
         
         //User messages
         lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");

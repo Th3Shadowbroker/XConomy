@@ -44,6 +44,34 @@ public class GUIItemStack {
         
     }
     
+     //Construction with existing item stack
+    public GUIItemStack( ItemStack itemStack, String displayName, List<String> lore, int position )
+    {
+        
+        //Set properties
+        this.material = itemStack.getType();
+        this.displayName = displayName;
+        this.lore = lore;
+        this.amount = itemStack.getAmount();
+        this.position = position;
+        
+        //Create item and item's meta
+        this.item = itemStack;
+        this.meta = item.getItemMeta();
+        
+        //Set display-name and lore if available
+        this.meta.setDisplayName( this.displayName );
+        
+        if ( lore != null )
+        {
+            this.meta.setLore( lore );
+        }
+        
+        //Fianlly set the meta
+        this.item.setItemMeta( this.meta );
+        
+    }
+    
     //Get items name
     public String getName()
     {

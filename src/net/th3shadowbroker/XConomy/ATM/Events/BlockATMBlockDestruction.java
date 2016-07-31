@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 
 public class BlockATMBlockDestruction implements Listener {
     
@@ -39,6 +40,27 @@ public class BlockATMBlockDestruction implements Listener {
             
             p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMBlockDestruction" ) );
             ev.setCancelled( true );
+            
+        }
+        
+    }
+    
+    @EventHandler
+    public void BlockATMExplosion( BlockExplodeEvent ev )
+    {
+
+        for( Block ExplodingBlock : ev.blockList() )
+        {
+            
+            Block clickedBlock = ExplodingBlock;
+            Location cBlock = new Location( clickedBlock.getWorld(), clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ() );
+
+            if ( plugin.ATMConfig.ATMExists( cBlock ) )
+            {
+
+                ev.setCancelled( true );
+
+            }
             
         }
         
