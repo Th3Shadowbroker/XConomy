@@ -77,10 +77,7 @@ public class XConRemove extends CommandArgument {
                 
                 if ( arguments[1].equalsIgnoreCase( "bank" ) )
                 {
-                    
-                    if ( player.hasPermission( "XConomy.admin" ) )
-                    {
-                        
+ 
                         XConomyPlayer currentState = plugin.getCache().getCacheEntry( new XConomyPlayer( player ) );
                         
                         if ( currentState.getState() == CacheState.NORMAL )
@@ -95,9 +92,7 @@ public class XConRemove extends CommandArgument {
                             player.sendMessage( plugin.ChatPrefix() + "§cBank deletion canceled" );
                             
                         }
-                        
-                    }
-                    
+
                 } else {
                     
                     throw new Exception();

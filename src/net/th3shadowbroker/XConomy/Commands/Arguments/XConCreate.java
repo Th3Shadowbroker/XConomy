@@ -8,8 +8,7 @@ public class XConCreate extends CommandArgument {
 
     @Override
     public void RunAction() {
-        if ( player.hasPermission( "XConomy.admin" ) )
-        {    
+  
             try {
                 
                 if ( arguments.length != 1 )
@@ -50,7 +49,6 @@ public class XConCreate extends CommandArgument {
                 ex.printStackTrace();
                 
             }
-        }
     }
     
 }

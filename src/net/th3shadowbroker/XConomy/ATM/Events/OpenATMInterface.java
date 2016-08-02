@@ -4,6 +4,8 @@ import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Events;
+import net.th3shadowbroker.XConomy.Permissions.Permissions;
+import net.th3shadowbroker.XConomy.Permissions.Permissions.XConomyPermission;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -37,7 +39,7 @@ public class OpenATMInterface implements Listener
         
         Player p = ev.getPlayer();
         
-        if ( p.hasPermission( "XConomy.useatm" ) )
+        if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ATM ) ) )
         {
 
             if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK && ev.getHand() == EquipmentSlot.HAND )

@@ -4,6 +4,7 @@ import java.io.File;
 import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
 import net.th3shadowbroker.XConomy.Addons.OverrideManager;
 import net.th3shadowbroker.XConomy.Bank.Bank;
+import net.th3shadowbroker.XConomy.Bank.FeeManager;
 import net.th3shadowbroker.XConomy.Cache.PlayerCache;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
@@ -31,6 +32,7 @@ public class main extends JavaPlugin {
     private PlayerCache cache;
     public Bank BankManager;
     public OverrideManager Overrides;
+    public FeeManager FeePayement;
 
     //Load it up
     @Override
@@ -60,6 +62,7 @@ public class main extends JavaPlugin {
         
         Console.write( "Loading bank-runtime..." );
         BankManager = new Bank( this, new File( this.getDataFolder(), "bank.yml" ) );
+        FeePayement = new FeeManager();
         
         Console.write( "Loading ATM's..." );
         ATMConfig = new ATMConfig( this , "ATM" );

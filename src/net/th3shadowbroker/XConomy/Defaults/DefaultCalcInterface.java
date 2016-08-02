@@ -79,9 +79,9 @@ public class DefaultCalcInterface extends ATMInterface
         GUIItemStack L1I3 = new GUIItemStack( new ItemStack( Material.WOOL, 3,(short) 11 ), "§e" + String.valueOf( 3 ) , null, 14); Elements.add(L1I3);
         
         //Line one actions
-        GUIItemAction L1A1 = new GUIItemAction( L1I1, this, new NumberItemAction() );
-        GUIItemAction L1A2 = new GUIItemAction( L1I2, this, new NumberItemAction() );
-        GUIItemAction L1A3 = new GUIItemAction( L1I3, this, new NumberItemAction() );
+        GUIItemAction L1A1 = new GUIItemAction( L1I1, this, new NumberItemAction(), false );
+        GUIItemAction L1A2 = new GUIItemAction( L1I2, this, new NumberItemAction(), false );
+        GUIItemAction L1A3 = new GUIItemAction( L1I3, this, new NumberItemAction(), false );
         
         //Line two
         GUIItemStack L2I1 = new GUIItemStack( new ItemStack( Material.WOOL, 4,(short) 11 ), "§e" + String.valueOf( 4 ) , null, 21); Elements.add(L2I1);
@@ -89,9 +89,9 @@ public class DefaultCalcInterface extends ATMInterface
         GUIItemStack L2I3 = new GUIItemStack( new ItemStack( Material.WOOL, 6,(short) 11 ), "§e" + String.valueOf( 6 ) , null, 23); Elements.add(L2I3);
         
         //Line two actions
-        GUIItemAction L2A1 = new GUIItemAction( L2I1, this, new NumberItemAction() );
-        GUIItemAction L2A2 = new GUIItemAction( L2I2, this, new NumberItemAction() );
-        GUIItemAction L2A3 = new GUIItemAction( L2I3, this, new NumberItemAction() );
+        GUIItemAction L2A1 = new GUIItemAction( L2I1, this, new NumberItemAction(), false );
+        GUIItemAction L2A2 = new GUIItemAction( L2I2, this, new NumberItemAction(), false );
+        GUIItemAction L2A3 = new GUIItemAction( L2I3, this, new NumberItemAction(), false );
         
         //Line three
         GUIItemStack L3I1 = new GUIItemStack( new ItemStack( Material.WOOL, 7,(short) 11 ), "§e" + String.valueOf( 7 ) , null, 30); Elements.add(L3I1);
@@ -99,9 +99,9 @@ public class DefaultCalcInterface extends ATMInterface
         GUIItemStack L3I3 = new GUIItemStack( new ItemStack( Material.WOOL, 9,(short) 11 ), "§e" + String.valueOf( 9 ) , null, 32); Elements.add(L3I3);
    
         //Line three actions
-        GUIItemAction L3A1 = new GUIItemAction( L3I1, this, new NumberItemAction() );
-        GUIItemAction L3A2 = new GUIItemAction( L3I2, this, new NumberItemAction() );
-        GUIItemAction L3A3 = new GUIItemAction( L3I3, this, new NumberItemAction() );
+        GUIItemAction L3A1 = new GUIItemAction( L3I1, this, new NumberItemAction(), false );
+        GUIItemAction L3A2 = new GUIItemAction( L3I2, this, new NumberItemAction(), false );
+        GUIItemAction L3A3 = new GUIItemAction( L3I3, this, new NumberItemAction(), false );
         
         
         //Line four / Options line
@@ -111,7 +111,7 @@ public class DefaultCalcInterface extends ATMInterface
         
         //Line four / Options line actions
         /* Add number extension to 0 */         GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction() );
-        /* Add ok extension to ok buton */      GUIItemAction L4A3 = new GUIItemAction( L4I3, this, new OKItemAction() );      
+        /* Add ok extension to ok buton */      GUIItemAction L4A3 = new GUIItemAction( L4I3, this, new OKItemAction(), false );      
         /* Add dot extension to dot buton */    GUIItemAction L4A1 = new GUIItemAction( L4I1, this, new DotItemAction() );
         
         //Add items to inerface

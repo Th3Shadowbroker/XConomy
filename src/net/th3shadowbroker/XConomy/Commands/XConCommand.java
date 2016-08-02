@@ -4,7 +4,10 @@ import net.th3shadowbroker.XConomy.Commands.Arguments.XConAdd;
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConCreate;
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConRemove;
 import net.th3shadowbroker.XConomy.Commands.Arguments.XConSet;
+import net.th3shadowbroker.XConomy.Commands.Arguments.XConTest;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
+import net.th3shadowbroker.XConomy.Permissions.Permissions;
+import net.th3shadowbroker.XConomy.Permissions.Permissions.XConomyPermission;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +16,7 @@ import org.bukkit.entity.Player;
 
 public class XConCommand implements CommandExecutor {
     
-    private final main plugin;
+    private final main XConomy;
     private final Commands loader;
     
     //Construction
@@ -22,7 +25,7 @@ public class XConCommand implements CommandExecutor {
         
         this.loader = loaderClass;
         
-        this.plugin = loaderClass.loader;
+        this.XConomy = loaderClass.loader;
         
     }
 
@@ -31,88 +34,101 @@ public class XConCommand implements CommandExecutor {
         
         Player p = (Player) sender;
         
-        if ( sender instanceof Player )
+        if ( cmd.getName().equalsIgnoreCase( "xcon" ) )
         {
-            if ( p.hasPermission( "XConomy.admin" ) | p.isOp() )
+            
+            if ( p instanceof Player )
             {
-                if ( cmd.getName().equalsIgnoreCase( "xcon" ) ) //Xcon command
+            
+                
+                
+                //Admin only commands
+                if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ADMIN ) ) )
                 {
-
-                    //No arguments given, so redirect to balance
-                    if ( args.length == 0 )
-                    {
-                        p.performCommand( "balance" );
-                        return true;
-                    }
-                    
-                    //Arguments
                     if ( args.length > 0 )
                     {
                         
-                        if ( args[0].equalsIgnoreCase( "info" ) )
+                        //Add command
+                        if ( args[0].equalsIgnoreCase( "Add" ) )
                         {
-                        p.sendMessage( plugin.ChatPrefix() + "§9Current version " + plugin.getDescription().getVersion() );
-                        p.sendMessage( plugin.ChatPrefix() + "§9XConomy created by " + plugin.getDescription().getAuthors() );
-                        return true;
+                            XConAdd XConAddCmd = new XConAdd();
+                            XConAddCmd.setVars( XConomy, args, loader, p );
+                            XConAddCmd.RunAction();
+                            return true;
                         }
-                        
-                        //Set money argument
-                        if ( args[0].equalsIgnoreCase( "set" ) )
-                        { 
-                          XConSet SetCommand = new XConSet();
-                          SetCommand.setVars( plugin , args , loader , p );
-                          SetCommand.RunAction();
-                          return true;
-                        }
-                        
-                        //Add money argument
-                        if ( args[0].equalsIgnoreCase( "add" ) )
-                        { 
-                          XConAdd AddCommand = new XConAdd();
-                          AddCommand.setVars( plugin , args , loader , p );
-                          AddCommand.RunAction();
-                          return true;
-                        }
-                        
-                        //Remove money argument
-                        if ( args[0].equalsIgnoreCase( "remove" ) | args[0].equalsIgnoreCase( "del" ) )
+
+                        //Remove command
+                        if ( args[0].equalsIgnoreCase( "Remove" ) )
                         {
-                          XConRemove RemoveCommand = new XConRemove();
-                          RemoveCommand.setVars( plugin , args , loader , p );
-                          RemoveCommand.RunAction();
-                          return true;
+                            XConRemove XConRemoveCmd = new XConRemove();
+                            XConRemoveCmd.setVars( XConomy, args, loader, p );
+                            XConRemoveCmd.RunAction();
+                            return true;
                         }
-                        
-                        //Create argument fot ATM's
-                        if ( args[0].equalsIgnoreCase( "create" ) )
+
+                        //Set command
+                        if ( args[0].equalsIgnoreCase( "Set" ) )
                         {
-                          XConCreate BankCreateCommand = new XConCreate();
-                          BankCreateCommand.setVars( plugin , args , loader , p );
-                          BankCreateCommand.RunAction();
-                          return true;
+                            XConSet XConSetCmd = new XConSet();
+                            XConSetCmd.setVars( XConomy, args, loader, p );
+                            XConSetCmd.RunAction();
+                            return true;
                         }
-                          
-                        //Invalid argument, so redirect to balance command
-                        p.performCommand( "balance " + args[0] );
+
+                        //Create command
+                        if ( args[0].equalsIgnoreCase( "Create" ) )
+                        {
+                            XConCreate XConCreateCmd = new XConCreate();
+                            XConCreateCmd.setVars( XConomy, args, loader, p );
+                            XConCreateCmd.RunAction();
+                            return true;
+                        }
+
+                        //Test command
+                        if ( args[0].equalsIgnoreCase( "Test" ) )
+                        {
+                            XConTest XConTestCmd = new XConTest();
+                            XConTestCmd.setVars( XConomy, args, loader, p );
+                            XConTestCmd.RunAction();
+                            return true;
+                        }
                         
-                        //p.sendMessage( plugin.ChatPrefix() + "§cPlease use " + ChatColor.GOLD + "/xcon <info:set:add:del> [Player] [Amount]" );
-                        return true;
-                        
-                    }
-                    
+                    }  
                 }
-            }
-        } else {
+
+                //User commands
+                if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
+                {
+                   if ( args.length > 0 ) 
+                   {
+                        //Info command
+                        if ( args[0].equalsIgnoreCase( "Info" ) )
+                        {
+                            p.sendMessage( XConomy.ChatPrefix() + "§bXConomy §ever." + XConomy.getDescription().getVersion() );
+                            p.sendMessage( XConomy.ChatPrefix() + "§bWritten by §e" + XConomy.getDescription().getAuthors() );
+                            p.sendMessage( XConomy.ChatPrefix() + "§bWebsite: §e" + XConomy.getDescription().getWebsite() );
+                            return true;
+                        }
+                   }
+                }
             
-           /*
-            *       If command send from console
-            */
-           
-           plugin.Console.write( "Please use InGame commands." );
-           
+                
+                //Placeholder for null-argument
+                p.performCommand( "balance" );
+                return true;
+
+                
+            //If console is sender    
+            } else  {
+            
+                XConomy.Console.write( "The console isn't allmighty my friend" );
+                return true;
+            }
+ 
         }
         
         return false;
+        
     }
     
 }

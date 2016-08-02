@@ -21,6 +21,8 @@ public class DotItemAction extends GUIItemExtension
         
         DefaultCalcInterface CurrentCalcInterface = (DefaultCalcInterface) CurrentInterface;
         
+        CurrentCalcInterface.ForceUpdateAmount( "." );
+        
         if ( 
                 /* Does not already contain a dot/comma */  !String.valueOf( CurrentCalcInterface.GetAmount() ).contains( "." ) &&
                 /* Amount isn't equal to placeholder    */  !CurrentCalcInterface.getInventory().getItem(4).getItemMeta().getDisplayName().equals( "---" )

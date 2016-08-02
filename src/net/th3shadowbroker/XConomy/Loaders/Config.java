@@ -27,12 +27,21 @@ public class Config {
          *      Load all default settings
          */
         
+        config.addDefault( "Bank.FeeDelay" , 1 );
+        
         config.addDefault( "ConsolePrefix" , "[XConomy]" );
         config.addDefault( "ChatPrefix" , "&9[&eX&9Conomy]" );
         config.addDefault( "Currency.Shortname" , "C" );
         config.addDefault( "Currency.FullName" , "Credits" );
+
+        config.addDefault( "Fees.Limits.1000" , 0.05 );
+        config.addDefault( "Fees.Limits.10000" , 0.025 );
+        config.addDefault( "Fees.Limits.100000" , 0.0125 );
+        config.addDefault( "Fees.Limits.>100000" , 0.00625 );
+        
         config.addDefault( "Messages.MessageOnTransfer" , true );
         config.addDefault( "Actions.CreateAccountOnJoin" , true );
+        config.addDefault( "Actions.AllowTransferFromEverywhere" , true );
         
         config.options().copyDefaults( true );
         loader.saveConfig();

@@ -3,6 +3,8 @@ package net.th3shadowbroker.XConomy.Commands;
 import net.th3shadowbroker.XConomy.Commands.Arguments.BalanceFromArguments;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Objects.Account;
+import net.th3shadowbroker.XConomy.Permissions.Permissions;
+import net.th3shadowbroker.XConomy.Permissions.Permissions.XConomyPermission;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,7 +29,7 @@ public class BalanceCommand implements CommandExecutor {
         
         Player p = (Player) sender;
         
-        if ( p.hasPermission( "XConomy.player.balance" ) )
+        if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
         {
                 if ( cmd.getName().equalsIgnoreCase( "balance" ) )
                 {
@@ -51,10 +53,13 @@ public class BalanceCommand implements CommandExecutor {
 
                     if ( args.length == 1 )
                     {
-                       BalanceFromArguments balanceFromArgs = new BalanceFromArguments();
-                       balanceFromArgs.setVars( plugin , args , loader , p );
-                       balanceFromArgs.RunAction();
-                       return true;
+                       if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ADMIN ) ) )
+                       {
+                           BalanceFromArguments balanceFromArgs = new BalanceFromArguments();
+                           balanceFromArgs.setVars( plugin , args , loader , p );
+                           balanceFromArgs.RunAction();
+                           return true;
+                       }
                     }
                     
                 }

@@ -77,7 +77,10 @@ public class GUIItemAction implements Listener {
                             
                             if ( RemoveAfterTriggered == true )
                             {
-                                HandlerList.unregisterAll( this );
+                                
+                                HandlerList HL = ev.getHandlers();
+                                HL.unregister( this );
+                                
                             }
 
                     }

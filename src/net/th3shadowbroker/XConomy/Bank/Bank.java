@@ -135,6 +135,70 @@ public class Bank
         }
     }
     
+    //Get bank-account balance
+    private double GetBalance( String uuid )
+    {
+        if ( Bank.getString( "Bank." + uuid ) != null )
+        {
+            
+            return Bank.getDouble( "Bank." + uuid );
+            
+        } else {
+            
+            return 0.0;
+            
+        }
+    }
+    
+    //Set a bank-account balance
+    private void SetBalance( String uuid, double newAmount )
+    {
+        
+        String path = "Bank." + uuid;
+        
+        Bank.set( path , newAmount );
+        
+        Save();
+        
+    }
+    
+    //Pay the fees to every account
+    public void PayFees()
+    {
+        
+        for( String BankAccount : Bank.getStringList( "Bank" ) )
+        {
+            if( BankAccount != null )
+            {
+                
+                if ( GetBalance( BankAccount ) <= 1000 )                //1.000
+                {
+                 
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.1000" ) );
+                    
+                } else if ( GetBalance( BankAccount ) <= 10000 ) {      //10.000
+                    
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.10000" ) );
+                    
+                } else if ( GetBalance( BankAccount ) <= 100.000 ) {    //100.000
+                    
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.100000" ) );
+                    
+                } else if ( GetBalance( BankAccount ) > 100.000 ) {     //>100.000
+                    
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.>100000" ) );
+                    
+                } else {
+                    
+                    XConomy.Console.write( "There was a problem while paying the fees to " + BankAccount );
+                    
+                }
+                
+            }
+        }
+        
+    }
+    
     //Save bank-file
     private void Save()
     {
