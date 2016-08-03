@@ -36,6 +36,7 @@ public class Messages {
         lang.setTextOnce( "AccountInvalidAmount" , "&c%AMOUNT% is not a valid amount" );
         lang.setTextOnce( "AccountNotEnoughMoney" , "&cThere is not enough money on %PLAYER%'s account" );
         lang.setTextOnce( "AccountNotEnoughMoneyToOwner" , "&cYou don't have enough money" );
+        lang.setTextOnce( "AccountNotEnoughMoneyToOwnerBank" , "&cYou don't have enough money on your bank" );
         
         //ATM messages
         lang.setTextOnce( "ATMTitle" , "&e%OWNER%s account" );
@@ -61,6 +62,7 @@ public class Messages {
         lang.setTextOnce( "SystemATMCreated" , "&2ATM created successfully at this location" );
         lang.setTextOnce( "SystemATMRemoved" , "&cATM removed successfully from this location" );
         lang.setTextOnce( "SystemATMNotFound" , "&cATM not found" );
+        lang.setTextOnce( "SystemPlayerSearchingDatabase" , "&2Please wait... searching database..." );
         
     }
     

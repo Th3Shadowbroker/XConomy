@@ -10,6 +10,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.RegisteredListener;
 
 public class GUIItemAction implements Listener {
  
@@ -31,7 +32,10 @@ public class GUIItemAction implements Listener {
         
         this.ATMInterface = ATMInterface;
 
-        Bukkit.getPluginManager().registerEvents( this , XConomy );
+        if ( this.IsUnique() )
+        {
+            Bukkit.getPluginManager().registerEvents( this , XConomy );
+        }
 
     }
     
@@ -49,43 +53,86 @@ public class GUIItemAction implements Listener {
 
         this.RemoveAfterTriggered = RemoveAfterTriggered;
         
-        Bukkit.getPluginManager().registerEvents( this , XConomy );
+        if ( this.IsUnique() )
+        {
+            Bukkit.getPluginManager().registerEvents( this , XConomy );
+        }
 
+    }
+    
+    //Check for duplicate (self-destruct if true)
+    private boolean IsUnique()
+    {
+         
+         for ( RegisteredListener listener : HandlerList.getRegisteredListeners( XConomy ) )
+         {
+            if ( listener.getListener().equals( this ) )
+            {
+                
+                    //Check for developer-setting
+                    if ( XConomy.Config.getString( "DebugMode" ) != null )
+                    {
+                        if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                        {
+                            XConomy.Console.write( "DEBUG//EVENT//HANDLED_EXCEPTION> GUI-Action " + Item.getName() + " already exist. Registration cancelled." );
+                        }
+                    }
+                
+                return  false;
+                
+            }
+         }
+
+                    //Check for developer-setting
+                    if ( XConomy.Config.getString( "DebugMode" ) != null )
+                    {
+                        if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                        {
+                            XConomy.Console.write( "DEBUG//EVENT//HANDLED_EXCEPTION> GUI-Action " + Item.getName() + " does not exist. Registration successfull." );
+                        }
+                    }
+        
+        return true;
+                             
     }
  
     //The Event
     @EventHandler( priority = EventPriority.NORMAL )
     public void GUIActionEvent( InventoryClickEvent ev )
     {
-        if ( !HandlerList.getRegisteredListeners( XConomy ).contains( this ) )
+        if ( ATMInterface.getInventory().equals( ev.getInventory() ) )
         {
-            if ( ev.getCurrentItem() instanceof ItemStack && ev.getCursor() != null )
+            if ( ev.getCurrentItem() != null && ev.getCurrentItem().equals( Item.getItemStack() ) )
             {
-                if ( ev.getInventory().getName().equals( ATMInterface.getInventory().getName() ) )
+                //Check for valid extension (valid is equal to != null)
+                if ( Extension != null )
                 {
-
-                    if ( ev.getCurrentItem().getItemMeta().getDisplayName().equals( Item.getName() ) )
+                    Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface, Item );
+                    Extension.OnConstruct();
+                    Extension.Run();
+                }
+                
+                //Dispose listener after triggered once
+                if ( RemoveAfterTriggered )
+                {
+                    for ( RegisteredListener listener : ev.getHandlers().getRegisteredListeners() )
                     {
-
-                            ev.setCancelled( true );
-
-                            if ( Extension != null )
-                            {
-                                Extension.UpdateInformations( (Player) ev.getWhoClicked() , ATMInterface, Item );
-                                Extension.Run();
-                            }
-                            
-                            if ( RemoveAfterTriggered == true )
-                            {
-                                
-                                HandlerList HL = ev.getHandlers();
-                                HL.unregister( this );
-                                
-                            }
-
+                        if ( listener.getListener().equals( this ) )
+                        {
+                            ev.getHandlers().unregister( listener );
+                        }
                     }
-
-               }
+                }
+                
+                //Check for developer-setting
+                if ( XConomy.Config.getString( "DebugMode" ) != null )
+                {
+                    if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                    {
+                        XConomy.Console.write( "DEBUG//EVENT> " + Item.getName() );
+                    }
+                }
+                    
             }
         }
     }

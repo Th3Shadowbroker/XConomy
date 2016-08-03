@@ -32,10 +32,10 @@ public class Bank
     {
         try {
             
-            if ( Bank.getString( "Bank." + p.getUniqueId().toString() ) == null )
+            if ( Bank.getString( p.getUniqueId().toString() ) == null )
             {
                 
-                Bank.set( "Bank." + p.getUniqueId().toString() , 0.0 );
+                Bank.set( p.getUniqueId().toString() , 0.0 );
                 Save();
             
             }
@@ -50,7 +50,7 @@ public class Bank
     //Add some money
     public void Deposit( Player p, double amount )
     {
-        if ( Bank.getString( "Bank." + p.getUniqueId().toString() ) != null )
+        if ( Bank.getString( p.getUniqueId().toString() ) != null )
         {
             
             Account TargetAccount = new Account( XConomy, p ); 
@@ -60,7 +60,7 @@ public class Bank
                 
                 TargetAccount.removeMoney( amount );
                 
-                Bank.set( "Bank." + p.getUniqueId().toString(), GetBalance( p ) + amount );
+                Bank.set( p.getUniqueId().toString(), GetBalance( p ) + amount );
                 Save();
                 
                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" )
@@ -84,15 +84,15 @@ public class Bank
     //Get some money
     public void Withdraw( Player p, double amount ) throws NotEnoughMoneyException
     {
-        if ( Bank.getString( "Bank." + p.getUniqueId().toString() ) != null )
+        if ( Bank.getString( p.getUniqueId().toString() ) != null )
         {
             
             Account TargetAccount = new Account( XConomy, p ); 
             
-            if ( Bank.getDouble( "Bank." + p.getUniqueId().toString() ) >= amount )
+            if ( Bank.getDouble( p.getUniqueId().toString() ) >= amount )
             {
                 
-                Bank.set( "Bank." + p.getUniqueId().toString(), GetBalance( p ) - amount );
+                Bank.set( p.getUniqueId().toString(), GetBalance( p ) - amount );
                 
                 
                 
@@ -120,13 +120,22 @@ public class Bank
         }
     }
     
+    //Force money removement
+    public void RemoveMoney( Player p, double amount )
+    {
+        
+        Bank.set( p.getUniqueId().toString() , Bank.getDouble( p.getUniqueId().toString() ) - amount );
+        Save();
+        
+    }
+    
     //Get bank-account balance
     public double GetBalance( Player p )
     {
-        if ( Bank.getString( "Bank." + p.getUniqueId().toString() ) != null )
+        if ( Bank.getString( p.getUniqueId().toString() ) != null )
         {
             
-            return Bank.getDouble( "Bank." + p.getUniqueId().toString() );
+            return Bank.getDouble( p.getUniqueId().toString() );
             
         } else {
             
@@ -138,10 +147,10 @@ public class Bank
     //Get bank-account balance
     private double GetBalance( String uuid )
     {
-        if ( Bank.getString( "Bank." + uuid ) != null )
+        if ( Bank.getString( uuid ) != null )
         {
             
-            return Bank.getDouble( "Bank." + uuid );
+            return Bank.getDouble( uuid );
             
         } else {
             
@@ -154,7 +163,7 @@ public class Bank
     private void SetBalance( String uuid, double newAmount )
     {
         
-        String path = "Bank." + uuid;
+        String path = uuid;
         
         Bank.set( path , newAmount );
         
@@ -162,31 +171,48 @@ public class Bank
         
     }
     
+    //Bank account has enough
+    public boolean HasEnough( Player p, double amount )
+    {
+        
+        double CurrentBankAccountBalance = Bank.getDouble( p.getUniqueId().toString() );
+        
+        if ( CurrentBankAccountBalance >= amount )
+        {
+            return true;
+        }
+        
+        return false;
+        
+    }
+    
     //Pay the fees to every account
     public void PayFees()
     {
         
-        for( String BankAccount : Bank.getStringList( "Bank" ) )
+        for( String BankAccount : Bank.getKeys(false) )
         {
             if( BankAccount != null )
             {
                 
+                XConomy.Console.write( "Paying fees to " + BankAccount );
+                
                 if ( GetBalance( BankAccount ) <= 1000 )                //1.000
                 {
                  
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.1000" ) );
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.1000" ) );
                     
                 } else if ( GetBalance( BankAccount ) <= 10000 ) {      //10.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.10000" ) );
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.10000" ) );
                     
                 } else if ( GetBalance( BankAccount ) <= 100.000 ) {    //100.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.100000" ) );
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.100000" ) );
                     
                 } else if ( GetBalance( BankAccount ) > 100.000 ) {     //>100.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.>100000" ) );
+                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.>100000" ) );
                     
                 } else {
                     

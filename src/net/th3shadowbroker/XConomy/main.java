@@ -12,7 +12,9 @@ import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.Objects.Plugins;
+import net.th3shadowbroker.XConomy.Objects.Transaction;
 import net.th3shadowbroker.XConomy.System.Console;
+import net.th3shadowbroker.XConomy.System.LogFile;
 import net.th3shadowbroker.XConomy.Vault.VaultPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +30,7 @@ public class main extends JavaPlugin {
     public FileConfiguration Config;
     public ATMConfig ATMConfig;
     public Language lang;
+    public LogFile TransactionLog;
     
     private PlayerCache cache;
     public Bank BankManager;
@@ -46,6 +49,7 @@ public class main extends JavaPlugin {
         Console.write( "Loading config..." );
         Config = getConfig();
         loadConfig();
+        TransactionLog = new LogFile( new File( this.getDataFolder(), "transactions.log" ) );
         
         Console.write( "Loading prefixes..." );
         setPrefix();

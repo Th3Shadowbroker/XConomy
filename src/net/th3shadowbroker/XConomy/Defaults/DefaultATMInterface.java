@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoDeposit;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoWithdraw;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomDeposit;
+import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomWithdraw;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemAction;
 import net.th3shadowbroker.XConomy.GUI.GUIItemStack;
@@ -45,7 +46,7 @@ public class DefaultATMInterface extends ATMInterface
         
             //Decleration of the Withdraw Items
             GUIItemStack DepositItem = new GUIItemStack( Material.PAPER, XConomy.lang.getText( "ATMItemDeposit" ), null , 1, 0 ); Elements.add( DepositItem );
-            GUIItemAction DepositAction = new GUIItemAction( DepositItem, this, null );
+            //GUIItemAction DepositAction = new GUIItemAction( DepositItem, this, null );
 
             GUIItemStack CustomDepositItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomDeposit" ), null , 1, 8 ); Elements.add( CustomDepositItem );
             GUIItemAction CustomDepositAction = new GUIItemAction( CustomDepositItem, this, new DefaultCustomDeposit() );
@@ -91,10 +92,10 @@ public class DefaultATMInterface extends ATMInterface
             
             //Decleration of the Withdraw Items
             GUIItemStack WithdrawItem = new GUIItemStack( Material.PAPER, XConomy.lang.getText( "ATMItemWithdraw" ), null , 1, 18 ); Elements.add( WithdrawItem );
-            GUIItemAction WithdrawAction = new GUIItemAction( WithdrawItem, this, null );
+            //GUIItemAction WithdrawAction = new GUIItemAction( WithdrawItem, this, null );
 
             GUIItemStack CustomWithdrawItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomWithdraw" ), null , 1, 26 ); Elements.add( CustomWithdrawItem );
-            GUIItemAction CustomWithdrawAction = new GUIItemAction( WithdrawItem, this, null );
+            GUIItemAction CustomWithdrawAction = new GUIItemAction( CustomWithdrawItem, this, new DefaultCustomWithdraw() );
 
             int WDCounter = 5;
 

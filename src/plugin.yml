@@ -13,6 +13,11 @@ commands:
         aliases: [xconomy, eco, money]
     balance:
         description: Check a players account-balance.
-        permission: XConomy.player.balance
+        permission: XConomy.user
         usage: /balance [Player]
         aliases: [money]
+    pay:
+        description: Transfer a custom amount of money to another player
+        permission: XConomy.user
+        usage: /pay <Player> <Amount>
+        aliases: [transfer, trans]

@@ -27,6 +27,8 @@ public class Config {
          *      Load all default settings
          */
         
+        config.options().header( "XConomy written by Th3Shadowbroker \n KEEP IN MIND: THE FEE-MANAGER WILL PAY THE FEES EVERY HOUR \n BY DEFAULT." );
+        
         config.addDefault( "Bank.FeeDelay" , 1 );
         
         config.addDefault( "ConsolePrefix" , "[XConomy]" );
@@ -40,8 +42,10 @@ public class Config {
         config.addDefault( "Fees.Limits.>100000" , 0.00625 );
         
         config.addDefault( "Messages.MessageOnTransfer" , true );
+        
         config.addDefault( "Actions.CreateAccountOnJoin" , true );
         config.addDefault( "Actions.AllowTransferFromEverywhere" , true );
+        config.addDefault( "Actions.LogTransactions" , false );
         
         config.options().copyDefaults( true );
         loader.saveConfig();

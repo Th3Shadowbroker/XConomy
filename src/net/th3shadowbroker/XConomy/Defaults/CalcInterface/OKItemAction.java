@@ -1,6 +1,7 @@
 package net.th3shadowbroker.XConomy.Defaults.CalcInterface;
 
 import net.th3shadowbroker.XConomy.Defaults.DefaultCalcInterface;
+import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.GUI.GUIItemExtension;
 import net.th3shadowbroker.XConomy.main;
 
@@ -38,12 +39,15 @@ public class OKItemAction extends GUIItemExtension
                    
                case TRANSFER:
                
-                    //Currently not implemented
+                   //Currently not implemented
                    
            }
            
            Player.closeInventory();
+        
+       } catch ( NotEnoughMoneyException ex ) {
            
+           Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotEnoughMoneyToOwner" ) );
            
        } catch ( Exception ex ) {
            
