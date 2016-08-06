@@ -1,6 +1,7 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
-import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
+import net.th3shadowbroker.XConomy.Addons.OverrideManager;
+import net.th3shadowbroker.XConomy.Addons.OverrideManager.OverrideType;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Events;
@@ -50,11 +51,11 @@ public class OpenATMInterface implements Listener
                 
                 if ( plugin.ATMConfig.ATMExists( cBlock ) )
                 {
-  
+
                         DefaultATMInterface test = new DefaultATMInterface(p);
                         GUIItemBlocker testBlocker = new GUIItemBlocker( this.loader, test );
                         test.OpenTo( p , true );
-
+ 
                 }
                             
             }

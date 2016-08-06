@@ -21,5 +21,13 @@ public class Console {
        System.out.println( plugin.ConsolePrefix() + text );
        
    }
+   
+   //Send message to console
+   public void writeAPI( String text )
+   {
+       
+       System.out.println( plugin.ConsolePrefix() + "[API] " + text );
+       
+   }
     
 }

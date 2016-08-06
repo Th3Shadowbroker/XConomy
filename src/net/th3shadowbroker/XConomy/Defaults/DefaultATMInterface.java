@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy.Defaults;
 
 import java.util.ArrayList;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoDeposit;
+import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoTransfer;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoWithdraw;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomDeposit;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomWithdraw;
@@ -125,6 +126,50 @@ public class DefaultATMInterface extends ATMInterface
                 } else {
 
                     WDCounter += 25;
+
+                }
+  
+            }
+            
+            /*
+             *           Transfer-ITEM
+             */
+            
+            //Decleration of the Transfer Items
+            GUIItemStack TransferItem = new GUIItemStack( Material.PAPER, XConomy.lang.getText( "ATMItemTransfer" ), null , 1, 36 ); Elements.add( TransferItem );
+            //GUIItemAction TransferAction = new GUIItemAction( TransferItem, this, null );
+
+            GUIItemStack CustomTransferItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomTransfer" ), null , 1, 44 ); Elements.add( CustomTransferItem );
+            GUIItemAction CustomTransferAction = new GUIItemAction( CustomTransferItem, this, null );
+
+            int TDCounter = 5;
+
+            for ( int i = 38; i != 44; i++ )
+            {
+
+                //Check if slot is already occupied
+                for ( GUIItemStack CurrentTransferItems : Elements )
+                {
+                    if ( CurrentTransferItems.getPos() == i )
+                    {
+
+                        throw new NullPointerException( "This error is currently not implemented." );
+
+                    }
+                }
+
+                //Everything beyond this line will be launched if everything is ok
+                GUIItemStack AutoTransferItem = new GUIItemStack( Material.BOOK, XConomy.lang.getText("ATMItemTransfer") + ": " + String.valueOf( TDCounter ), null, 1, i ); Elements.add( AutoTransferItem );
+                GUIItemAction AutoTransferAction = new GUIItemAction( AutoTransferItem, this, new DefaultAutoTransfer() );
+
+                if ( TDCounter == 5 )
+                {
+
+                    TDCounter = 25;
+
+                } else {
+
+                    TDCounter += 25;
 
                 }
   

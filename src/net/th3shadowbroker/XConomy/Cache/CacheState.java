@@ -19,6 +19,10 @@ public enum CacheState
     //Waiting for deletion
     WAIT_DELETION,
     
+    //Wating for typing name for transfer
+    WAIT_TRANSFER_NAME,
+    WAIT_TRANSFER_AMOUNT,
+    
     //Something else
     OTHER
     

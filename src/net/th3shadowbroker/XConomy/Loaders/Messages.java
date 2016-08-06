@@ -51,6 +51,12 @@ public class Messages {
         lang.setTextOnce( "ATMItemTransfer" , "&9Transfer" );
         lang.setTextOnce( "ATMItemCustomTransfer" , "&9Custom transfer" );
         
+        //Transfer messages
+        lang.setTextOnce( "Transfer.TypeTarget" , "&2Please type in the target" );
+        lang.setTextOnce( "Transfer.TypeAmount" , "&2Please type in the amount you want to send");
+        lang.setTextOnce( "Transfer.OutOfRange" , "&cTransfer cancelled" );
+        lang.setTextOnce( "Transfer.CancelMessage" , "&cYou are already started a transaction. Type # to cancel." );
+        
         //User messages
         lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");
         lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: %BALANCE%");

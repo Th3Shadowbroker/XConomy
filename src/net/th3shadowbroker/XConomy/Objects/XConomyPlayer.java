@@ -25,7 +25,7 @@ public class XConomyPlayer {
         this.state = CacheState.NORMAL;
         
     }
-    
+        
     //Get the player
     public Player getPlayer()
     {
@@ -49,7 +49,7 @@ public class XConomyPlayer {
     {
         return state;
     }
-    
+
     //Set the current state to another
     public void setState( CacheState newState )
     {

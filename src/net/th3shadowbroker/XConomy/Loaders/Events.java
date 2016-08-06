@@ -7,7 +7,6 @@ import net.th3shadowbroker.XConomy.ATM.Events.OpenATMInterface;
 import net.th3shadowbroker.XConomy.Cache.Events.AddEntryOnJoin;
 import net.th3shadowbroker.XConomy.Cache.Events.RemoveEntryOnQuit;
 import net.th3shadowbroker.XConomy.Events.CreateAccountOnJoin;
-import net.th3shadowbroker.XConomy.Events.MoneyTransfered;
 import net.th3shadowbroker.XConomy.main;
 
 public class Events {
@@ -46,7 +45,7 @@ public class Events {
          */
         
             //Money transfer event
-            loader.getServer().getPluginManager().registerEvents( new MoneyTransfered( this ) , loader);
+            //loader.getServer().getPluginManager().registerEvents( new TransactionTransfered( this ) , loader);
             
             //Account creation on join event
             loader.getServer().getPluginManager().registerEvents( new CreateAccountOnJoin( this ) , loader);

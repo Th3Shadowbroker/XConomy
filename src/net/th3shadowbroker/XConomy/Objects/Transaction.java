@@ -58,7 +58,9 @@ public class Transaction
             }
             
             //Call event
-            Bukkit.getPluginManager().callEvent( new MoneyTransferEvent( Sender, Target, Amount ) );
+            XConomy.getServer().getPluginManager().callEvent( new MoneyTransferEvent( Sender, Target, Amount ) );
+            
+            MessageToPlayers();
             
             //Log transaction
             LogTransaction();
@@ -94,7 +96,9 @@ public class Transaction
             }
             
             //Call event
-            Bukkit.getPluginManager().callEvent( new MoneyTransferEvent( Sender, Target, Amount ) );
+            XConomy.getServer().getPluginManager().callEvent( new MoneyTransferEvent( Sender, Target, Amount ) );
+            
+            MessageToPlayers();
             
             //Log transaction
             LogTransaction();
@@ -114,6 +118,24 @@ public class Transaction
         {
             XConomy.TransactionLog.WriteEntry( ID.GetID()+ "--> " + Amount );
         }
+    }
+    
+    //Send messages to sender and target
+    private void MessageToPlayers()
+    {
+         Sender.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount )
+                                                                                                   .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
+                                                                                                   .replaceAll( "%FULLNAME%" , XConomy.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
+            
+            if ( Target.isOnline() )
+            {
+                
+                Target.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToTarget" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount )
+                                                                                                          .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
+                                                                                                          .replaceAll( "%SENDER%" , Sender.getDisplayName() )
+                                                                                                          .replaceAll( "%FULLNAME%" , XConomy.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
+                
+            }
     }
     
     //Get the transaction sender

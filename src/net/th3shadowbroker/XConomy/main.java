@@ -6,13 +6,13 @@ import net.th3shadowbroker.XConomy.Addons.OverrideManager;
 import net.th3shadowbroker.XConomy.Bank.Bank;
 import net.th3shadowbroker.XConomy.Bank.FeeManager;
 import net.th3shadowbroker.XConomy.Cache.PlayerCache;
+import net.th3shadowbroker.XConomy.Defaults.Transfer.TransferQueue;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
 import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.Objects.Plugins;
-import net.th3shadowbroker.XConomy.Objects.Transaction;
 import net.th3shadowbroker.XConomy.System.Console;
 import net.th3shadowbroker.XConomy.System.LogFile;
 import net.th3shadowbroker.XConomy.Vault.VaultPlugin;
@@ -24,24 +24,43 @@ public class main extends JavaPlugin {
     private String ConsolePrefix = "[XConomy] ";
     private String ChatPrefix = "§b[XConomy] ";
     
+    //XConomy's current instance
     private static main instance;
+    
+    //Object for lazy devs like me
     public Console Console;
     
+    //XConomy's config
     public FileConfiguration Config;
+    
+    //Stores ATM-Informations
     public ATMConfig ATMConfig;
+    
+    //Handler for custom messages
     public Language lang;
+    
+    //Logs every transaction (if enabled)
     public LogFile TransactionLog;
     
+    //The cache is storing players state-info
     private PlayerCache cache;
+    
+    //Manages the bank
     public Bank BankManager;
+    
+    //Manages overrides from external plugins
     public OverrideManager Overrides;
+    
+    //Manages the fees for every account
     public FeeManager FeePayement;
+    
+    //Stores players who are currently waiting for money transfer
+    public TransferQueue TransferQueue;
 
     //Load it up
     @Override
     public void onEnable()
     {
-        
         instance = this;
         cache = new PlayerCache();
         Console = new Console( this );

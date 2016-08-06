@@ -1,65 +1,77 @@
 package net.th3shadowbroker.XConomy.Addons;
 
 import java.util.ArrayList;
+import net.th3shadowbroker.XConomy.API.XConomyAddon;
 
 public class OverrideManager 
 {
     
-    private ArrayList<XConOverride> Overrides = new ArrayList<XConOverride>();
+    private ArrayList< XConomyAddon > Overrides = new ArrayList< XConomyAddon >();
     
-    //Type of manual override
+    //Possible types of override
     public enum OverrideType
     {
         ATM_INTERFACE,
         NONE
     }
     
-    //Register a new override
-    public void RegisterOverride( XConOverride Override )
+    //Register new override
+    public void RegisterOverride( XConomyAddon Addon ) throws Exception
     {
-        if ( !Overrides.contains( Override ) && !OverrideExists( Override.GetOverrideType() ) )
+        if ( !Overrides.contains( Addon ) )
         {
             
-            Overrides.add( Override );
+            Overrides.add( Addon );
             
         } else {
             
-            throw new NullPointerException( "This exception is currently not implemented." );
+            throw new Exception( "This addon is already registered." );
             
-        }  
-    }
-    
-    //Check for specific override
-    public boolean OverrideExists( OverrideType Type )
-    {
-        for ( XConOverride Override : Overrides )
-        {
-            if ( Override.GetOverrideType() == Type )
-            {
-                
-                return true;
-                
-            }
         }
-        
-        return false;
-        
     }
     
-    //Get a specific override
-    public XConOverride GetOverride( OverrideType Type )
+    //Get a specific type of override
+    public XConomyAddon GetOverride( OverrideType type )
     {
-        for ( XConOverride Override : Overrides ) 
+        
+        try 
         {
-            if ( Override.GetOverrideType() == Type ) 
+            if ( Overrides != null )
             {
-                
-                return Override;
-                
+                for ( XConomyAddon addon : Overrides )
+                {
+                    if ( addon.GetOverrideType().equals( type ) )
+                    {
+                        return addon;
+                    }
+                }
             }
+        } catch ( Exception ex ) {
+            
+            //Nothing
+            
         }
         
         return null;
+        
+    }
+    
+    //Enable all addons
+    public void EnableAddons()
+    {
+        for ( XConomyAddon addon : Overrides )
+        {
+            addon.OnEnable();
+        }
+    }
+    
+    //Disable all addons
+    public void DisableAddons()
+    {
+        for ( XConomyAddon addon : Overrides )
+        {
+            addon.OnDisable();
+        }
     }
     
 }
