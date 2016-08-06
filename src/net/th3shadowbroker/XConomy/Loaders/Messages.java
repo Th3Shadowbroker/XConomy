@@ -55,7 +55,10 @@ public class Messages {
         lang.setTextOnce( "Transfer.TypeTarget" , "&2Please type in the target" );
         lang.setTextOnce( "Transfer.TypeAmount" , "&2Please type in the amount you want to send");
         lang.setTextOnce( "Transfer.OutOfRange" , "&cTransfer cancelled" );
+        lang.setTextOnce( "Transfer.CancelByUser" , "&2Transfer cancelled" );
         lang.setTextOnce( "Transfer.CancelMessage" , "&cYou are already started a transaction. Type # to cancel." );
+        lang.setTextOnce( "Transfer.Success" , "&2Transfer successfull" );
+        lang.setTextOnce( "Transfer.TargetNotFound" , "&cPlayer not found" );
         
         //User messages
         lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");

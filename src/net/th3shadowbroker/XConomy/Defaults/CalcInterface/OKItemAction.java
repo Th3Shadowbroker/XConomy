@@ -3,6 +3,7 @@ package net.th3shadowbroker.XConomy.Defaults.CalcInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultCalcInterface;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.GUI.GUIItemExtension;
+import net.th3shadowbroker.XConomy.Objects.DoubleFormatter;
 import net.th3shadowbroker.XConomy.main;
 
 public class OKItemAction extends GUIItemExtension
@@ -20,9 +21,7 @@ public class OKItemAction extends GUIItemExtension
     public void Run() 
     {
        try{
-           
-           XConomy.Console.write( "Transfer confirmed successfully!" );
-           
+
            DefaultCalcInterface CurrentCalcInterface = (DefaultCalcInterface) CurrentInterface;
            
            //Check type and do the right things

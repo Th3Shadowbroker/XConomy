@@ -110,7 +110,7 @@ public class DefaultCalcInterface extends ATMInterface
         /* Confirm   */    GUIItemStack L4I3 = new GUIItemStack( new ItemStack( Material.WOOL, 1,(short) 13 ), "§2OK", null, 41); Elements.add(L4I3);
         
         //Line four / Options line actions
-        /* Add number extension to 0 */         GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction() );
+        /* Add number extension to 0 */         GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction(),false );
         /* Add ok extension to ok buton */      GUIItemAction L4A3 = new GUIItemAction( L4I3, this, new OKItemAction(), false );      
         /* Add dot extension to dot buton */    GUIItemAction L4A1 = new GUIItemAction( L4I1, this, new DotItemAction() );
         

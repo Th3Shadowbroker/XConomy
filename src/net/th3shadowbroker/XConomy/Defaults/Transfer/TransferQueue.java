@@ -33,6 +33,19 @@ public class TransferQueue
         }
     }
     
+    //Get a waiting player from queue
+    public QueuedPlayer GetPlayer( Player player )
+    {
+        for ( QueuedPlayer qplayer : WaitingPlayers )
+        {
+            if ( qplayer.GetPlayer().equals( player ) )
+            {
+                return qplayer;
+            }
+        }
+        return null;
+    }
+    
     //Check if a player is already in queue
     public boolean PlayerIsWaiting( Player player )
     {

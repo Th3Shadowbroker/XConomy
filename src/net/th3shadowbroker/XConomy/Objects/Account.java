@@ -106,7 +106,7 @@ public class Account {
         if ( amount >= 0 )
         {
             
-            accounts.set( owner.getUniqueId().toString() , amount );
+            accounts.set( owner.getUniqueId().toString() , DoubleFormatter.Format( amount ) );
             this.save();
             
         }   else    {
@@ -124,7 +124,7 @@ public class Account {
             
             double before = accounts.getDouble( owner.getUniqueId().toString() );
         
-            accounts.set( owner.getUniqueId().toString() , before + amount );
+            accounts.set( owner.getUniqueId().toString() , before + DoubleFormatter.Format( amount ) );
         
             this.save();
             
@@ -145,7 +145,7 @@ public class Account {
             if ( this.hasEnough( amount ) )
             {
 
-                accounts.set( owner.getUniqueId().toString() , before - amount );
+                accounts.set( owner.getUniqueId().toString() , before - DoubleFormatter.Format(amount) );
 
                 this.save();
 
@@ -162,6 +162,7 @@ public class Account {
         
     }
     
+    @Deprecated
     //Transfer some money
     public void transferMoney( Player to , double amount ) throws NotEnoughMoneyException
     {
@@ -192,7 +193,7 @@ public class Account {
     public boolean hasEnough( double howMuch )
     {
         
-        return howMuch <= getMoney();
+        return DoubleFormatter.Format(howMuch) <= getMoney();
         
     }
     

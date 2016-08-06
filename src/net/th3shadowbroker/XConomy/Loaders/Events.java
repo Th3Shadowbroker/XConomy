@@ -6,6 +6,7 @@ import net.th3shadowbroker.XConomy.ATM.Events.BlockATMBlockDestruction;
 import net.th3shadowbroker.XConomy.ATM.Events.OpenATMInterface;
 import net.th3shadowbroker.XConomy.Cache.Events.AddEntryOnJoin;
 import net.th3shadowbroker.XConomy.Cache.Events.RemoveEntryOnQuit;
+import net.th3shadowbroker.XConomy.Defaults.Transfer.ArgumentCatcher;
 import net.th3shadowbroker.XConomy.Events.CreateAccountOnJoin;
 import net.th3shadowbroker.XConomy.main;
 
@@ -49,6 +50,9 @@ public class Events {
             
             //Account creation on join event
             loader.getServer().getPluginManager().registerEvents( new CreateAccountOnJoin( this ) , loader);
+            
+            //Catch arguments from chat
+            loader.getServer().getPluginManager().registerEvents( new ArgumentCatcher( this ) , loader);
             
         /*
          *      Setup ATM creation events and etc.

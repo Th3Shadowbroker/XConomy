@@ -41,11 +41,6 @@ public class DefaultAutoTransfer extends GUIItemExtension
                 Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemUniErrMsg" ) );
                 ex.printStackTrace();
 
-            } catch ( Exception ex ) {
-
-                Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemUniErrMsg" ) );
-                ex.printStackTrace();
-
             }
             
         } else {
