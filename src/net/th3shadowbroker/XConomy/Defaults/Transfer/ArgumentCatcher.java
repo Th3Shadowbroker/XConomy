@@ -1,8 +1,8 @@
 package net.th3shadowbroker.XConomy.Defaults.Transfer;
 
 import net.th3shadowbroker.XConomy.Cache.CacheState;
+import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.Loaders.Events;
-import net.th3shadowbroker.XConomy.Objects.ColorRemover;
 import net.th3shadowbroker.XConomy.Objects.Transaction;
 import net.th3shadowbroker.XConomy.Objects.XConomyPlayer;
 import net.th3shadowbroker.XConomy.main;
@@ -70,6 +70,12 @@ public class ArgumentCatcher implements Listener
                     
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.Success" ) );
                     
+                } catch ( NotEnoughMoneyException ex ) {    
+                
+                    Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotEnoughMoneyToOwner" ) );
+                    
+                    XConomy.getCache().updateCacheEntry( new XConomyPlayer( Player ) , CacheState.NORMAL);
+                    XConomy.TransferQueue.RemoveWaiting( Player );
 
                 } catch ( Exception ex ) {
                     

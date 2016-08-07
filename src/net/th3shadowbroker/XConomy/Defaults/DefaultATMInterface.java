@@ -5,6 +5,7 @@ import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoDeposit;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoTransfer;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultAutoWithdraw;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomDeposit;
+import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomTransfer;
 import net.th3shadowbroker.XConomy.ATM.Extensions.DefaultCustomWithdraw;
 import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemAction;
@@ -140,7 +141,7 @@ public class DefaultATMInterface extends ATMInterface
             //GUIItemAction TransferAction = new GUIItemAction( TransferItem, this, null );
 
             GUIItemStack CustomTransferItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomTransfer" ), null , 1, 44 ); Elements.add( CustomTransferItem );
-            GUIItemAction CustomTransferAction = new GUIItemAction( CustomTransferItem, this, null );
+            GUIItemAction CustomTransferAction = new GUIItemAction( CustomTransferItem, this, new DefaultCustomTransfer() );
 
             int TDCounter = 5;
 

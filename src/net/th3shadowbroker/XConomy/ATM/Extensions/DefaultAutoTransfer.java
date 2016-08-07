@@ -34,8 +34,6 @@ public class DefaultAutoTransfer extends GUIItemExtension
                 XConomy.TransferQueue.AddWaiting( new QueuedPlayer( Player, Double.parseDouble( FilteredName ) ) );
                 XConomy.getCache().updateCacheEntry( new XConomyPlayer( Player ) , CacheState.WAIT_TRANSFER_NAME );
 
-                Player.closeInventory();
-                
                 Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.TypeTarget" ) );
 
             } catch ( NotInCacheException ex ) {
@@ -50,6 +48,8 @@ public class DefaultAutoTransfer extends GUIItemExtension
             Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.CancelMessage" ) );
             
         }
+        
+        Player.closeInventory();
         
     }
     

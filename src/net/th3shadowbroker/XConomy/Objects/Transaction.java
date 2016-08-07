@@ -123,17 +123,19 @@ public class Transaction
     //Send messages to sender and target
     private void MessageToPlayers()
     {
-         Sender.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount )
-                                                                                                   .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
-                                                                                                   .replaceAll( "%FULLNAME%" , XConomy.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
+         Sender.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount ) )
+                                                                                                   .replaceAll( "%SHORTNAME%" ,  XConomy.Config.getString( "Currency.Shortname" ) )
+                                                                                                   .replaceAll( "%FULLNAME%" ,  XConomy.Config.getString( "Currency.FullName" ).toLowerCase() ));
+                                                                                                   
             
             if ( Target.isOnline() )
             {
                 
-                Target.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToTarget" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount )
+                Target.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToTarget" ).replaceAll( "%AMOUNT%" , String.valueOf( Amount ) )
                                                                                                           .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
                                                                                                           .replaceAll( "%SENDER%" , Sender.getDisplayName() )
-                                                                                                          .replaceAll( "%FULLNAME%" , XConomy.Config.getString( "Currency.FullName" ) ).toLowerCase()) );
+                                                                                                          .replaceAll( "%FULLNAME%" , XConomy.Config.getString( "Currency.FullName" ).toLowerCase() )
+                                                                                                         );
                 
             }
     }
