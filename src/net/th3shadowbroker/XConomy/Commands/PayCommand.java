@@ -41,53 +41,62 @@ public class PayCommand implements CommandExecutor
             {
                 if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
                 {
-                    
-                    if ( args.length == 2 )
+                    if ( XConomy.Config.getBoolean( "Actions.AllowTransferFromEverywhere" ) )
                     {
-
-                        try
+                        if ( args.length == 2 )
                         {
 
-                            //This player seems to be our target
-                            Player target = Bukkit.getOfflinePlayer( args [0] ).getPlayer();
+                            try
+                            {
 
-                            //Let's create a new transaction for the office!
-                            Transaction TransferTransaction = new Transaction( p, target, Double.parseDouble( args[1] ) );
+                                //This player seems to be our target
+                                Player target = Bukkit.getOfflinePlayer( args [0] ).getPlayer();
 
-                            //Try to transfer the money
-                            try {
+                                //Let's create a new transaction for the office!
+                                Transaction TransferTransaction = new Transaction( p, target, Double.parseDouble( args[1] ) );
 
-                                TransferTransaction.Transfer();
+                                //Try to transfer the money
+                                try {
 
-                            } catch (NotEnoughMoneyException ex) {
+                                    TransferTransaction.Transfer();
 
-                                p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotEnoughMoneyToOwnerBank" ) );
+                                } catch (NotEnoughMoneyException ex) {
 
-                            } catch (InvalidAmountException ex) {
+                                    p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotEnoughMoneyToOwnerBank" ) );
+
+                                } catch (InvalidAmountException ex) {
+
+                                    p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountInvalidAmount" ).replaceAll( "%AMOUNT%" , args[1] ) );
+
+                                }
+
+                            //If the given double isn't a double
+                            } catch ( NumberFormatException ex ) {
 
                                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountInvalidAmount" ).replaceAll( "%AMOUNT%" , args[1] ) );
 
+                            //Any oher error    
+                            } catch ( Exception ex ) {
+
+                                p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotFound" ).replaceAll( "%OWNER%" , args[0] ) );
+
                             }
 
-                        //If the given double isn't a double
-                        } catch ( NumberFormatException ex ) {
+                            return true;
+                        
+                        } else {
 
-                            p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountInvalidAmount" ).replaceAll( "%AMOUNT%" , args[1] ) );
-
-                        //Any oher error    
-                        } catch ( Exception ex ) {
-
-                            p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotFound" ).replaceAll( "%OWNER%" , args[0] ) );
+                            p.sendMessage( XConomy.ChatPrefix() + "§cPlease use §e/pay <Player> <Amount>" );
+                            return true;
 
                         }
-
-                        return true;
                         
                     } else {
-
-                        p.sendMessage( XConomy.ChatPrefix() + "§cPlease use §e/pay <Player> <Amount>" );
+                        
+                        
+                        p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemPayCmdDenied" ) );
                         return true;
-
+                        
                     }
                     
                 }

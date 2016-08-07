@@ -48,7 +48,7 @@ public class Config {
         config.addDefault( "Messages.MessageOnTransfer" , true );
         
         config.addDefault( "Actions.CreateAccountOnJoin" , true );
-        config.addDefault( "Actions.AllowTransferFromEverywhere" , true );
+        config.addDefault( "Actions.AllowTransferFromEverywhere" , false );
         config.addDefault( "Actions.LogTransactions" , false );
         
         config.options().copyDefaults( true );

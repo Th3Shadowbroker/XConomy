@@ -66,6 +66,7 @@ public class ArgumentCatcher implements Listener
                     Transaction.Transfer();
                     
                     XConomy.getCache().updateCacheEntry( new XConomyPlayer( Player ) , CacheState.NORMAL);
+                    XConomy.TransferQueue.RemoveWaiting( Player );
                     
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.Success" ) );
                     
