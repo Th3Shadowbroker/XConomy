@@ -12,10 +12,9 @@ import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Objects.Language;
-import net.th3shadowbroker.XConomy.Objects.Plugins;
 import net.th3shadowbroker.XConomy.System.Console;
 import net.th3shadowbroker.XConomy.System.LogFile;
-import net.th3shadowbroker.XConomy.Vault.VaultPlugin;
+import net.th3shadowbroker.XConomy.Vault.VaultHook;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -58,6 +57,9 @@ public class main extends JavaPlugin {
     //Stores players who are currently waiting for money transfer
     public TransferQueue TransferQueue;
 
+    //Register XConomy a global economy system
+    public VaultHook VaultHook;
+    
     //Load it up
     @Override
     public void onEnable()
@@ -162,9 +164,11 @@ public class main extends JavaPlugin {
     //Setup vault
     private void setupService()
     {
-        if ( Plugins.VaultIsEnabled() )
+        if ( this.getServer().getPluginManager().isPluginEnabled( "Vault" ) )
         {
-            VaultPlugin VaultLoader = new VaultPlugin();
+            VaultHook = new VaultHook();
+        } else {
+            Console.write( "Vault not found. Please use XConomy-API" );
         }
     }
     
