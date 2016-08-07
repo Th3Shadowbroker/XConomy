@@ -21,7 +21,7 @@ public class XConCreate extends CommandArgument {
                             {
 
                                 plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.WAIT_CREATE_BANK );
-                                player.sendMessage( plugin.ChatPrefix() + "§2Rigt-click on the bank you want do create" );
+                                player.sendMessage( plugin.ChatPrefix() + "§2Rigt-click on the bank you want to create" );
 
                             } else {
 
