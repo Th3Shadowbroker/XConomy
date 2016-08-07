@@ -7,7 +7,6 @@ import net.th3shadowbroker.XConomy.Objects.Transaction;
 import net.th3shadowbroker.XConomy.Objects.XConomyPlayer;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,17 +41,23 @@ public class ArgumentCatcher implements Listener
             //Is player in queue ?
             if ( XConomy.TransferQueue.PlayerIsWaiting( Player ) )
             {
+                
+                ev.setCancelled( true );
+                
                 //If player want to cancel the transaction
                 if ( Message.equals( "#" ) )
                 {
                     XConomy.getCache().updateCacheEntry( new XConomyPlayer( Player ) , CacheState.NORMAL);
+                    
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.CancelByUser" ) );
+                    XConomy.TransferQueue.RemoveWaiting( Player );
+                    
                     return;
                 }
                 
                 try {
                     
-                    OfflinePlayer Target = Bukkit.getOfflinePlayer( ColorRemover.RemoveColorFrom( Message ) );
+                    OfflinePlayer Target = Bukkit.getOfflinePlayer( Message );
                     
                     QueuedPlayer PlayerInQueue = XConomy.TransferQueue.GetPlayer( Player );
                     
@@ -64,10 +69,12 @@ public class ArgumentCatcher implements Listener
                     
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.Success" ) );
                     
+
                 } catch ( Exception ex ) {
                     
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.TargetNotFound" ) );
-                    
+                    XConomy.Console.write( ex.getMessage() );
+  
                 }
                 
             }

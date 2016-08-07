@@ -17,6 +17,7 @@ import net.th3shadowbroker.XConomy.System.Console;
 import net.th3shadowbroker.XConomy.System.LogFile;
 import net.th3shadowbroker.XConomy.Vault.VaultPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class main extends JavaPlugin {
@@ -65,6 +66,9 @@ public class main extends JavaPlugin {
         cache = new PlayerCache();
         Console = new Console( this );
         
+        Console.write( "Initializing null variables..." );
+        TransferQueue = new TransferQueue();
+        
         Console.write( "Loading config..." );
         Config = getConfig();
         loadConfig();
@@ -103,6 +107,12 @@ public class main extends JavaPlugin {
     {
         
         saveConfig();
+        
+        Console.write( "Killing remaining listeners..." );
+        
+        HandlerList Handles = new HandlerList();
+        Handles.unregister( this );
+        
         Console.write( "XConomy disabled !" );
         
     }

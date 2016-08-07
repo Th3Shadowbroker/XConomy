@@ -36,6 +36,7 @@ public class Config {
         
         config.addDefault( "Currency.Shortname" , "C" );
         config.addDefault( "Currency.FullName" , "Credits" );
+        
         config.addDefault( "Currency.StartAccountWith" , 0.0 );
         config.addDefault( "Currency.StartBankWith" , 0.0 );
         

@@ -49,14 +49,15 @@ public class TransferQueue
     //Check if a player is already in queue
     public boolean PlayerIsWaiting( Player player )
     {
-        for ( QueuedPlayer qplayer : WaitingPlayers )
-        {
-            if ( qplayer.GetPlayer().equals( player ) )
+
+            for ( QueuedPlayer qplayer : WaitingPlayers )
             {
-               return true;
+                if ( qplayer.GetPlayer().equals( player ) )
+                {
+                   return true;
+                }
             }
-        }
-        
+
         return false;
         
     }

@@ -52,7 +52,7 @@ public class Messages {
         lang.setTextOnce( "ATMItemCustomTransfer" , "&9Custom transfer" );
         
         //Transfer messages
-        lang.setTextOnce( "Transfer.TypeTarget" , "&2Please type in the target" );
+        lang.setTextOnce( "Transfer.TypeTarget" , "&2Please type in the target or &c# &2to cancel" );
         lang.setTextOnce( "Transfer.TypeAmount" , "&2Please type in the amount you want to send");
         lang.setTextOnce( "Transfer.OutOfRange" , "&cTransfer cancelled" );
         lang.setTextOnce( "Transfer.CancelByUser" , "&2Transfer cancelled" );
