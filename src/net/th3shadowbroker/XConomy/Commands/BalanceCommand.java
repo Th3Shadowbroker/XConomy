@@ -27,10 +27,12 @@ public class BalanceCommand implements CommandExecutor {
     @Override
     public boolean onCommand( CommandSender sender, Command cmd, String cmdLabel, String[] args ) {
         
-        Player p = (Player) sender;
-        
-        if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
+        if ( sender instanceof Player ) 
         {
+            Player p = (Player) sender;
+        
+            if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
+            {
                 if ( cmd.getName().equalsIgnoreCase( "balance" ) )
                 {
                     //No arguments given: Get own balance
@@ -39,7 +41,9 @@ public class BalanceCommand implements CommandExecutor {
                         if ( Account.accountExists( p.getUniqueId() ) )
                         {
 
-                            p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "UserBalanceCommand" ).replaceAll( "%BALANCE%" , String.valueOf( new Account( plugin, p ).getMoney() ) ) );
+                            p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "UserBalanceCommand" ).replaceAll( "%BALANCE%" , String.valueOf( new Account( plugin, p ).getMoney() ) ) 
+                                                                                                            .replaceAll( "%BANK%" , String.valueOf( plugin.BankManager.GetBalance(p) ) )
+                            );
                             return true;
                             
                         } else {
@@ -63,7 +67,14 @@ public class BalanceCommand implements CommandExecutor {
                     }
                     
                 }
-        } 
+            }
+            
+        } else {
+            
+            plugin.Console.write( "I think god does not need a bank account" );
+            
+        }
+         
         
        return true;
         

@@ -26,6 +26,9 @@ public class XConomyAPI
     {
         this.Plugin = YourPlugin;
         this.XConomy = main.getInstance();
+        
+        XConomy.Console.writeAPI( YourPlugin.getName() + "is now using XConomy" );
+        
     }
     
     //Get XConomy's bank system

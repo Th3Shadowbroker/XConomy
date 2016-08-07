@@ -32,15 +32,15 @@ public class XConCommand implements CommandExecutor {
     @Override
     public boolean onCommand( CommandSender sender, Command cmd, String cmdLabel, String[] args ) {
         
-        Player p = (Player) sender;
+        
         
         if ( cmd.getName().equalsIgnoreCase( "xcon" ) )
         {
             
-            if ( p instanceof Player )
+            if ( sender instanceof Player )
             {
             
-                
+                Player p = (Player) sender;
                 
                 //Admin only commands
                 if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ADMIN ) ) )
@@ -121,7 +121,7 @@ public class XConCommand implements CommandExecutor {
             //If console is sender    
             } else  {
             
-                XConomy.Console.write( "The console isn't allmighty my friend" );
+                XConomy.Console.write( "The console is not allmighty my friend" );
                 return true;
             }
  

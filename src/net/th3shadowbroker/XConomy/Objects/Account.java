@@ -65,7 +65,7 @@ public class Account {
             if ( this.owner != null && accounts.get( owner.getUniqueId().toString() ) == null )
             {
                 
-                accounts.set( owner.getUniqueId().toString() , 0.00 );
+                accounts.set( owner.getUniqueId().toString() , XConomy.Config.getDouble( "Currency.StartAccountWith" ) );
                 XConomy.BankManager.CreateBankAccount( owner );
                 this.save();
 
@@ -123,8 +123,10 @@ public class Account {
         {
             
             double before = accounts.getDouble( owner.getUniqueId().toString() );
+            
+            double NewAmount = before + amount;
         
-            accounts.set( owner.getUniqueId().toString() , before + DoubleFormatter.Format( amount ) );
+            accounts.set( owner.getUniqueId().toString() , DoubleFormatter.Format( NewAmount ) );
         
             this.save();
             
@@ -145,7 +147,9 @@ public class Account {
             if ( this.hasEnough( amount ) )
             {
 
-                accounts.set( owner.getUniqueId().toString() , before - DoubleFormatter.Format(amount) );
+                double NewAmount = before - amount;
+
+                accounts.set( owner.getUniqueId().toString() , DoubleFormatter.Format( NewAmount ) );
 
                 this.save();
 

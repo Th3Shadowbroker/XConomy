@@ -33,9 +33,12 @@ public class Config {
         
         config.addDefault( "ConsolePrefix" , "[XConomy]" );
         config.addDefault( "ChatPrefix" , "&9[&eX&9Conomy]" );
+        
         config.addDefault( "Currency.Shortname" , "C" );
         config.addDefault( "Currency.FullName" , "Credits" );
-
+        config.addDefault( "Currency.StartAccountWith" , 0.0 );
+        config.addDefault( "Currency.StartBankWith" , 0.0 );
+        
         config.addDefault( "Fees.Limits.1000" , 0.05 );
         config.addDefault( "Fees.Limits.10000" , 0.025 );
         config.addDefault( "Fees.Limits.100000" , 0.0125 );

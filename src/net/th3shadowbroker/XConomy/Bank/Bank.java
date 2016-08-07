@@ -36,7 +36,7 @@ public class Bank
             if ( Bank.getString( p.getUniqueId().toString() ) == null )
             {
                 
-                Bank.set( p.getUniqueId().toString() , 0.0 );
+                Bank.set( p.getUniqueId().toString() , XConomy.Config.getDouble( "StartBankWith" ) );
                 Save();
             
             }
@@ -55,29 +55,29 @@ public class Bank
         {
             
             Account TargetAccount = new Account( XConomy, p ); 
-            
-            double RoundedAmount = DoubleFormatter.Format( amount );
-            
+
             try 
             {
                 
-                TargetAccount.removeMoney( RoundedAmount );
+                TargetAccount.removeMoney( amount );
                 
-                Bank.set( p.getUniqueId().toString(), GetBalance( p ) + RoundedAmount );
+                Bank.set( p.getUniqueId().toString(), DoubleFormatter.Format( GetBalance( p ) + amount ) );
                 Save();
                 
                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" )
-                                                      .replaceAll( "%AMOUNT%" , String.valueOf( RoundedAmount ) )
+                                                      .replaceAll( "%AMOUNT%" , String.valueOf( DoubleFormatter.Format( amount ) ) )
                                                       .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
                 );
                 
             } catch (NotEnoughMoneyException ex) {
                 
                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "AccountNotEnoughMoneyToOwner" ) );
+                return;
                 
             } catch (InvalidAmountException ex) {
                 
                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemUniErrMsg" ) );
+                return;
                 
             }
    
@@ -91,19 +91,17 @@ public class Bank
         {
             
             Account TargetAccount = new Account( XConomy, p ); 
-            
-            double RoundedAmount = DoubleFormatter.Format( amount );
-            
-            if ( Bank.getDouble( p.getUniqueId().toString() ) >= RoundedAmount )
+
+            if ( HasEnough( p, amount ) )
             {
                 
-                Bank.set( p.getUniqueId().toString(), GetBalance( p ) - RoundedAmount );
+                Bank.set( p.getUniqueId().toString(), DoubleFormatter.Format( GetBalance( p ) - amount ) );
                 
                 
                 
                 try {
                     
-                    TargetAccount.addMoney( RoundedAmount );
+                    TargetAccount.addMoney( amount );
                     
                 } catch (InvalidAmountException ex) {
                     
@@ -112,7 +110,7 @@ public class Bank
                 }
                 
                 p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "MoneyTransferToSender" )
-                                                      .replaceAll( "%AMOUNT%" , String.valueOf( RoundedAmount ) )
+                                                      .replaceAll( "%AMOUNT%" , String.valueOf( amount ) )
                                                       .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
                 );
                 
@@ -129,7 +127,7 @@ public class Bank
     public void RemoveMoney( Player p, double amount )
     {
         
-        Bank.set( p.getUniqueId().toString() , Bank.getDouble( p.getUniqueId().toString() ) - DoubleFormatter.Format( amount ) );
+        Bank.set( p.getUniqueId().toString() , DoubleFormatter.Format( Bank.getDouble( p.getUniqueId().toString() ) - amount ) );
         Save();
         
     }
@@ -176,13 +174,25 @@ public class Bank
         
     }
     
+     //Set a bank-account balance by forcing
+    private void ForceBalance( String uuid, double newAmount )
+    {
+        
+        String path = uuid;
+        
+        Bank.set( path , DoubleFormatter.Format( newAmount ) );
+        
+        Save();
+        
+    }
+    
     //Bank account has enough
     public boolean HasEnough( Player p, double amount )
     {
         
         double CurrentBankAccountBalance = Bank.getDouble( p.getUniqueId().toString() );
         
-        if ( CurrentBankAccountBalance >= DoubleFormatter.Format( amount ) )
+        if ( CurrentBankAccountBalance >= amount )
         {
             return true;
         }
@@ -205,19 +215,19 @@ public class Bank
                 if ( GetBalance( BankAccount ) <= 1000 )                //1.000
                 {
                  
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) *  XConomy.Config.getDouble( "Fees.Limits.1000" )  );
+                    this.ForceBalance( BankAccount, DoubleFormatter.Format( GetBalance( BankAccount ) + GetBalance( BankAccount ) *  XConomy.Config.getDouble( "Fees.Limits.1000" ) )  );
                     
                 } else if ( GetBalance( BankAccount ) <= 10000 ) {      //10.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.10000" )  );
+                    this.ForceBalance( BankAccount, DoubleFormatter.Format( GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.10000" ) )  );
                     
                 } else if ( GetBalance( BankAccount ) <= 100.000 ) {    //100.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.100000" )  ) ;
+                    this.ForceBalance( BankAccount, DoubleFormatter.Format( GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.100000" ) )  ) ;
                     
                 } else if ( GetBalance( BankAccount ) > 100.000 ) {     //>100.000
                     
-                    this.SetBalance( BankAccount, GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.>100000" )  );
+                    this.ForceBalance( BankAccount, DoubleFormatter.Format( GetBalance( BankAccount ) + GetBalance( BankAccount ) * XConomy.Config.getDouble( "Fees.Limits.>100000" ) )  );
                     
                 } else {
                     

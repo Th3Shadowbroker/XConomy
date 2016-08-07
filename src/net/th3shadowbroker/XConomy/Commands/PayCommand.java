@@ -31,11 +31,12 @@ public class PayCommand implements CommandExecutor
     @Override
     public boolean onCommand( CommandSender sender, Command cmd, String cmdLabel, String[] args ) 
     {
-        
-        Player p = (Player) sender;
-        
-        if ( p instanceof Player )
+
+        if ( sender instanceof Player )
         {
+            
+            Player p = (Player) sender;
+            
             if ( cmd.getName().equalsIgnoreCase( "Pay" ) )
             {
                 if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.USER ) ) )
@@ -93,8 +94,8 @@ public class PayCommand implements CommandExecutor
             }
         } else {
             
-            XConomy.Console.write( "You don't have enough money. Yes you, in front of the console." );
-            
+            XConomy.Console.write( "You don't have enough money. Yes you! In front of the console!" );
+            return true;
         }
         
         return false;

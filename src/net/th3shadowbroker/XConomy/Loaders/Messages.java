@@ -61,8 +61,8 @@ public class Messages {
         lang.setTextOnce( "Transfer.TargetNotFound" , "&cPlayer not found" );
         
         //User messages
-        lang.setTextOnce( "UserBalanceCommand" , "&9Balance: %BALANCE%");
-        lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: %BALANCE%");
+        lang.setTextOnce( "UserBalanceCommand" , "&9Balance: &e%BALANCE% &9Bank: &e%BANK%");
+        lang.setTextOnce( "UserOthersBalanceCommand" , "&9%PLAYER%'s balance: &e%BALANCE%");
         
         //System messages
         lang.setTextOnce( "SystemUniErrMsg" , "&cThere was an error. See console." );

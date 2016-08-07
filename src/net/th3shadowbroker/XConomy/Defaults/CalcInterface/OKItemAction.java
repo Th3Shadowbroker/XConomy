@@ -3,7 +3,6 @@ package net.th3shadowbroker.XConomy.Defaults.CalcInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultCalcInterface;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.GUI.GUIItemExtension;
-import net.th3shadowbroker.XConomy.Objects.DoubleFormatter;
 import net.th3shadowbroker.XConomy.main;
 
 public class OKItemAction extends GUIItemExtension
@@ -32,14 +31,18 @@ public class OKItemAction extends GUIItemExtension
                    
                    XConomy.BankManager.Deposit( Player , CurrentCalcInterface.GetAmount() );
                    
+                break;
+                   
                case WITHDRAW:
                    
                    XConomy.BankManager.Withdraw( Player , CurrentCalcInterface.GetAmount() );
                    
+                break;
+                   
                case TRANSFER:
                
                    //Currently not implemented
-                   
+                break;
            }
            
            Player.closeInventory();
