@@ -3,6 +3,7 @@ package net.th3shadowbroker.XConomy.Objects;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+@Deprecated
 public class Plugins {
     
     public static boolean VaultIsEnabled()

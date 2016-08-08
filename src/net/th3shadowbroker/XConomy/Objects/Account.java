@@ -3,6 +3,8 @@ package net.th3shadowbroker.XConomy.Objects;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.Exceptions.InvalidAmountException;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import net.th3shadowbroker.XConomy.API.MoneyTransferEvent;
 import net.th3shadowbroker.XConomy.main;
@@ -222,4 +224,24 @@ public class Account {
             return tmpCfg.get( uid.toString() ) != null;
             
     }
+    
+    //Get all accounts
+    public static List<Account> getAccounts()
+    {
+        
+        File tmp = new File( main.getInstance().getDataFolder() , "accounts.yml" );
+        FileConfiguration tmpCfg = YamlConfiguration.loadConfiguration( tmp );
+        
+        ArrayList<Account> Accounts = new ArrayList<Account>();
+        
+        for ( String s : tmpCfg.getKeys(false) )
+        {
+            OfflinePlayer op = Bukkit.getOfflinePlayer( UUID.fromString(s) );
+            Accounts.add( new Account( main.getInstance(), op ) );
+        }
+        
+        return Accounts;
+        
+    }
+    
 }

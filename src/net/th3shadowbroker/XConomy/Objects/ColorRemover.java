@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy.Objects;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class ColorRemover 
 {
     
