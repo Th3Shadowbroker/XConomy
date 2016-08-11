@@ -3,9 +3,12 @@ package net.th3shadowbroker.XConomy.Objects;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.Exceptions.InvalidAmountException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.th3shadowbroker.XConomy.API.MoneyTransferEvent;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Bukkit;
@@ -36,7 +39,7 @@ public class Account {
         this.accounts = YamlConfiguration.loadConfiguration( accountsFile );
         
         this.XConomy = main.getInstance();
-        
+
         this.setup();
         
     }
@@ -54,7 +57,7 @@ public class Account {
         this.accounts = YamlConfiguration.loadConfiguration( accountsFile );
         
         this.XConomy = main.getInstance();
-        
+
         this.setup();
         
     }
@@ -78,6 +81,9 @@ public class Account {
             System.out.println( ex.getLocalizedMessage() );
    
         }
+        
+        this.save();
+        
     }
     
     //Save changes
@@ -201,6 +207,30 @@ public class Account {
         
         return DoubleFormatter.Format(howMuch) <= getMoney();
         
+    }
+    
+    //Import amount from essentials
+    public static void setByOverride( UUID uuid, double amount ) throws InvalidAmountException
+    {
+        if ( amount > 0 )
+        {
+            
+            File tmp = new File( main.getInstance().getDataFolder() , "accounts.yml" );
+            FileConfiguration tmpCfg = YamlConfiguration.loadConfiguration( tmp );
+        
+            tmpCfg.set( uuid.toString() , DoubleFormatter.Format( amount ) );
+            
+            try {
+                tmpCfg.save( tmp );
+            } catch (IOException ex) {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } else {
+            
+            throw new InvalidAmountException();
+            
+        }    
     }
     
     //Account exists: Offline

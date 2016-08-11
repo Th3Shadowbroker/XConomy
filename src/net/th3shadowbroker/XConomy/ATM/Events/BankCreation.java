@@ -34,6 +34,19 @@ public class BankCreation implements Listener {
     @EventHandler
     public void createBank( PlayerInteractEvent ev )
     {
+     
+        //Citizens preventions
+        try {
+            
+            CacheState tmp = plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState();
+            
+        } catch ( Exception ex ) {
+            
+            return;
+            
+        }
+        //End of prevention
+        
         if ( plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState() == CacheState.WAIT_CREATE_BANK ){
             
             if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK )

@@ -2,7 +2,6 @@ package net.th3shadowbroker.XConomy.ATM.Events;
 
 import net.th3shadowbroker.XConomy.ATM.ATM;
 import net.th3shadowbroker.XConomy.Cache.CacheState;
-import net.th3shadowbroker.XConomy.Exceptions.ATMExistsException;
 import net.th3shadowbroker.XConomy.Exceptions.ATMNotExistsException;
 import net.th3shadowbroker.XConomy.Exceptions.NotInCacheException;
 import net.th3shadowbroker.XConomy.Loaders.Events;
@@ -35,6 +34,20 @@ public class BankDeletion implements Listener {
     @EventHandler
     public void removeBank( PlayerInteractEvent ev )
     {
+        
+        //Citizens preventions
+        try {
+            
+            CacheState tmp = plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState();
+            
+        } catch ( Exception ex ) {
+            
+            return;
+            
+        }
+        //End of prevention
+            
+        
         if ( plugin.getCache().getCacheEntry( new XConomyPlayer( ev.getPlayer() ) ).getState() == CacheState.WAIT_DELETION ){
             
             if ( ev.getAction() == Action.RIGHT_CLICK_BLOCK )
