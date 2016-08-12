@@ -71,9 +71,10 @@ public class Messages {
         lang.setTextOnce( "SystemATMCreated" , "&2ATM created successfully at this location" );
         lang.setTextOnce( "SystemATMRemoved" , "&cATM removed successfully from this location" );
         lang.setTextOnce( "SystemATMNotFound" , "&cATM not found" );
+        lang.setTextOnce( "SystemATMCommandNotAllowed" , "&eYou are not allowed to use mobile ATM's" );
         lang.setTextOnce( "SystemPlayerSearchingDatabase" , "&2Please wait... searching database..." );
         lang.setTextOnce( "SystemPayCmdDenied" , "&cUse an ATM to transfer money to others" );
-        
+ 
     }
     
 }

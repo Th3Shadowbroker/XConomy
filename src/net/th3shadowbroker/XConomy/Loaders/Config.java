@@ -27,9 +27,12 @@ public class Config {
          *      Load all default settings
          */
         
-        config.options().header( "XConomy written by Th3Shadowbroker \n KEEP IN MIND: THE FEE-MANAGER WILL PAY THE FEES EVERY HOUR \n BY DEFAULT." );
+        config.options().header( "XConomy written by Th3Shadowbroker \n KEEP IN MIND: THE FEE-MANAGER WILL PAY THE FEES BY MILLISECONDS \n BY DEFAULT." );
         
-        config.addDefault( "Bank.FeeDelay" , 1 );
+        config.addDefault( "Bank.FeeDelay" , 86400 );
+        
+        config.addDefault( "ATM.StartAt" , 50000 );
+        config.addDefault( "ATM.StepSize" , 10000 );
         
         config.addDefault( "ConsolePrefix" , "[XConomy]" );
         config.addDefault( "ChatPrefix" , "&9[&eX&9Conomy]" );

@@ -29,19 +29,19 @@ public class DefaultCalcInterface extends ATMInterface
             case DEPOSIT:
                 
             this.OverrideDefaults( XConomy.lang.getText( "ATMItemCustomDeposit" ) , 54 );
-            
+            break;
             /////
             
             case WITHDRAW:
                 
             this.OverrideDefaults( XConomy.lang.getText( "ATMItemCustomWithdraw" ) , 54 );
-            
+            break;
             ////
             
             case TRANSFER:
                 
             this.OverrideDefaults( XConomy.lang.getText( "ATMItemCustomTransfer" ) , 54 );
-            
+            break;
         }
         
         this.SetupDefaults();
@@ -106,13 +106,13 @@ public class DefaultCalcInterface extends ATMInterface
         
         //Line four / Options line
         /* Add a dot */    GUIItemStack L4I1 = new GUIItemStack( new ItemStack( Material.WOOL, 1,(short) 4 ), "§e.", null, 39); Elements.add(L4I1);
-        /* Add a null*/    GUIItemStack L4I2 = new GUIItemStack( new ItemStack( Material.WOOL, 1,(short) 11 ), "§e0", null, 40); Elements.add(L4I2);
+        /* Add a null*/    GUIItemStack L4I2 = new GUIItemStack( new ItemStack( Material.WOOL, 0,(short) 11 ), "§e0", null, 40); Elements.add(L4I2);
         /* Confirm   */    GUIItemStack L4I3 = new GUIItemStack( new ItemStack( Material.WOOL, 1,(short) 13 ), "§2OK", null, 41); Elements.add(L4I3);
         
         //Line four / Options line actions
         /* Add number extension to 0 */         GUIItemAction L4A2 = new GUIItemAction( L4I2, this, new NumberItemAction(),false );
         /* Add ok extension to ok buton */      GUIItemAction L4A3 = new GUIItemAction( L4I3, this, new OKItemAction(), false );      
-        /* Add dot extension to dot buton */    GUIItemAction L4A1 = new GUIItemAction( L4I1, this, new DotItemAction() );
+        /* Add dot extension to dot button */    GUIItemAction L4A1 = new GUIItemAction( L4I1, this, new DotItemAction(), false );
         
         //Add items to inerface
         this.AddElements( Elements );
@@ -130,8 +130,25 @@ public class DefaultCalcInterface extends ATMInterface
     //Get the current amount
     public double GetAmount()
     {
+        try {
+            
+            Double d = Double.parseDouble( this.getInventory().getItem( 4 ).getItemMeta().getDisplayName() );
+            
+            return Double.parseDouble( this.getInventory().getItem( 4 ).getItemMeta().getDisplayName() );
+            
+        } catch ( NumberFormatException ex ) {
+            
+            return 0.0;
+            
+        }
+         
+    }
+    
+    //Amount is empty
+    public String GetAmountName()
+    {
         
-        return Double.parseDouble( this.getInventory().getItem( 4 ).getItemMeta().getDisplayName() );
+        return this.getInventory().getItem( 4 ).getItemMeta().getDisplayName();
         
     }
     
@@ -146,7 +163,7 @@ public class DefaultCalcInterface extends ATMInterface
         ItemStack NewAmount = CurrentAmount;
         ItemMeta NewAmountMeta = CurrentAmount.getItemMeta();
             
-        NewAmountMeta.setDisplayName( String.valueOf( NewAmountMeta.getDisplayName() ) + updatedAmount );
+        NewAmountMeta.setDisplayName( String.valueOf( CurrentName ) + updatedAmount );
         NewAmount.setItemMeta( NewAmountMeta );
             
         this.AddElement( new GUIItemStack( NewAmount, NewAmount.getItemMeta().getDisplayName(), null, 4 ) );

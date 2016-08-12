@@ -1,7 +1,5 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
-import net.th3shadowbroker.XConomy.Addons.OverrideManager;
-import net.th3shadowbroker.XConomy.Addons.OverrideManager.OverrideType;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Events;

@@ -8,13 +8,10 @@ public class FeeManager
 {
 
     private final main XConomy = main.getInstance();
-    private final int MultiplyNumber;
-    
+
     public FeeManager()
     {
-        
-        this.MultiplyNumber = XConomy.Config.getInt( "Bank.FeeDelay" );
-        
+
         this.SetupTimer();
         
     }
@@ -29,12 +26,24 @@ public class FeeManager
             @Override
             public void run()
             {
-                XConomy.BankManager.PayFees();
+                //Manage resetting
+                if ( XConomy.DateManager.GetCurrent() <= 0 )
+                {
+                    XConomy.Console.write( "Resettings fee-timer" );
+                    /*   Pay feed to everybody   */ XConomy.BankManager.PayFees();
+                    /*   Reset counter   */         XConomy.DateManager.Reset();
+
+                } else {
+                    
+                    /*   Send -1 to counter   */    XConomy.DateManager.SendDown();
+                    
+                }
+                
             }
         };
         
-        FeeTimer.schedule( FeeTask, 0, 1000 * 60 * 60 * this.MultiplyNumber );
-        XConomy.Console.write( "Fee timer is now active and will pay every " + this.MultiplyNumber + " hours..." );
+        FeeTimer.schedule( FeeTask, 0, 60 * 20 );
+        XConomy.Console.write( "Fee timer active..." );
         
     }
     

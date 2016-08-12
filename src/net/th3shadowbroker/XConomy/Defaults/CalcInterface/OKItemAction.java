@@ -61,8 +61,9 @@ public class OKItemAction extends GUIItemExtension
            
        } catch ( Exception ex ) {
            
-           ex.printStackTrace();
-           
+           /*
+                THIS ONLY HAPPENS IF THERE IS NO VALID INPUT. IN SHORT NOTHING TO DO HERE!
+           */
        }
        
     }

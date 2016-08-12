@@ -53,7 +53,7 @@ public class DefaultATMInterface extends ATMInterface
             GUIItemStack CustomDepositItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomDeposit" ), null , 1, 8 ); Elements.add( CustomDepositItem );
             GUIItemAction CustomDepositAction = new GUIItemAction( CustomDepositItem, this, new DefaultCustomDeposit() );
 
-            int DSCounter = 5;
+            int DSCounter = XConomy.Config.getInt( "ATM.StartAt" );
 
             for ( int i = 2; i != 8; i++ )
             {
@@ -73,16 +73,7 @@ public class DefaultATMInterface extends ATMInterface
                 GUIItemStack AutoDepositItem = new GUIItemStack( Material.EMERALD, XConomy.lang.getText("ATMItemDeposit") + ": " + String.valueOf( DSCounter ), null, 1, i ); Elements.add( AutoDepositItem );
                 GUIItemAction AutoDepositAction = new GUIItemAction( AutoDepositItem, this, new DefaultAutoDeposit() );
 
-                if ( DSCounter == 5 )
-                {
-
-                    DSCounter = 25;
-
-                } else {
-
-                    DSCounter += 25;
-
-                }
+                DSCounter += XConomy.Config.getInt( "ATM.StepSize" );
 
             }
             
@@ -99,7 +90,7 @@ public class DefaultATMInterface extends ATMInterface
             GUIItemStack CustomWithdrawItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomWithdraw" ), null , 1, 26 ); Elements.add( CustomWithdrawItem );
             GUIItemAction CustomWithdrawAction = new GUIItemAction( CustomWithdrawItem, this, new DefaultCustomWithdraw() );
 
-            int WDCounter = 5;
+            int WDCounter = XConomy.Config.getInt( "ATM.StartAt" );;
 
             for ( int i = 20; i != 26; i++ )
             {
@@ -119,16 +110,7 @@ public class DefaultATMInterface extends ATMInterface
                 GUIItemStack AutoWithdrawItem = new GUIItemStack( Material.REDSTONE, XConomy.lang.getText("ATMItemWithdraw") + ": " + String.valueOf( WDCounter ), null, 1, i ); Elements.add( AutoWithdrawItem );
                 GUIItemAction AutoWithdrawAction = new GUIItemAction( AutoWithdrawItem, this, new DefaultAutoWithdraw() );
 
-                if ( WDCounter == 5 )
-                {
-
-                    WDCounter = 25;
-
-                } else {
-
-                    WDCounter += 25;
-
-                }
+                WDCounter += XConomy.Config.getInt( "ATM.StepSize" );
   
             }
             
@@ -143,7 +125,7 @@ public class DefaultATMInterface extends ATMInterface
             GUIItemStack CustomTransferItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomTransfer" ), null , 1, 44 ); Elements.add( CustomTransferItem );
             GUIItemAction CustomTransferAction = new GUIItemAction( CustomTransferItem, this, new DefaultCustomTransfer() );
 
-            int TDCounter = 5;
+            int TDCounter = XConomy.Config.getInt( "ATM.StartAt" );
 
             for ( int i = 38; i != 44; i++ )
             {
@@ -163,16 +145,7 @@ public class DefaultATMInterface extends ATMInterface
                 GUIItemStack AutoTransferItem = new GUIItemStack( Material.BOOK, XConomy.lang.getText("ATMItemTransfer") + ": " + String.valueOf( TDCounter ), null, 1, i ); Elements.add( AutoTransferItem );
                 GUIItemAction AutoTransferAction = new GUIItemAction( AutoTransferItem, this, new DefaultAutoTransfer() );
 
-                if ( TDCounter == 5 )
-                {
-
-                    TDCounter = 25;
-
-                } else {
-
-                    TDCounter += 25;
-
-                }
+                TDCounter += XConomy.Config.getInt( "ATM.StepSize" );
   
             }
 

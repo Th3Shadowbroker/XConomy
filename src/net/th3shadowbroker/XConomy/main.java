@@ -12,6 +12,7 @@ import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Imports;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
+import net.th3shadowbroker.XConomy.Objects.DateDifferenceManager;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.System.Console;
 import net.th3shadowbroker.XConomy.System.LogFile;
@@ -61,6 +62,9 @@ public class main extends JavaPlugin {
     //Register XConomy a global economy system
     public VaultHook VaultHook;
     
+    //Manages time differences
+    public DateDifferenceManager DateManager;
+    
     //Load it up
     @Override
     public void onEnable()
@@ -92,8 +96,9 @@ public class main extends JavaPlugin {
         
         Console.write( "Loading bank-runtime..." );
         BankManager = new Bank( this, new File( this.getDataFolder(), "bank.yml" ) );
+        DateManager = new DateDifferenceManager( this );
         FeePayement = new FeeManager();
-        
+          
         Console.write( "Loading ATM's..." );
         ATMConfig = new ATMConfig( this , "ATM" );
         
@@ -113,6 +118,8 @@ public class main extends JavaPlugin {
     {
         
         saveConfig();
+
+        DateManager.Save();
         
         Console.write( "Killing remaining listeners..." );
         

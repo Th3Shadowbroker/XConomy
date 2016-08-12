@@ -1,7 +1,8 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
-import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Loaders.Events;
+import net.th3shadowbroker.XConomy.Permissions.Permissions;
+import net.th3shadowbroker.XConomy.Permissions.Permissions.XConomyPermission;
 import net.th3shadowbroker.XConomy.main;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -39,6 +40,12 @@ public class BlockATMBlockDestruction implements Listener {
         {
             
             p.sendMessage( plugin.ChatPrefix() + plugin.lang.getText( "SystemATMBlockDestruction" ) );
+            
+            if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ADMIN ) ) )
+            {
+                p.sendMessage( "§9Please use §e/xcon remove bank §9to remove an ATM" );
+            }
+            
             ev.setCancelled( true );
             
         }

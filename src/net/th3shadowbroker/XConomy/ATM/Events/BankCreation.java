@@ -33,8 +33,7 @@ public class BankCreation implements Listener {
     //Event to create banks
     @EventHandler
     public void createBank( PlayerInteractEvent ev )
-    {
-     
+    { 
         //Citizens preventions
         try {
             

@@ -19,14 +19,14 @@ public class XConTest extends CommandArgument
             
             XConomy.Console.write( "< Starting XConomy-Test >" );
             
-            for ( String ConfigEntry : XConomy.Config.getStringList( "" ) )
+            for ( String ConfigEntry : XConomy.Config.getKeys(true) )
             {
                 XConomy.Console.write( "Setting loaded-> " + ConfigEntry );
             }
             
             FileConfiguration AccountsCfg = YamlConfiguration.loadConfiguration( new File( XConomy.getDataFolder(), "accounts.yml" ) );
             
-            for ( String Account : AccountsCfg.getStringList( "" ) )
+            for ( String Account : AccountsCfg.getKeys(true) )
             {
                 XConomy.Console.write( "Account found-> " + Account );
             }
@@ -34,12 +34,12 @@ public class XConTest extends CommandArgument
             
             FileConfiguration BankCfg = YamlConfiguration.loadConfiguration( new File( XConomy.getDataFolder(), "bank.yml" ) );
             
-            for ( String BankAccount : BankCfg.getStringList( "Bank." ) )
+            for ( String BankAccount : BankCfg.getKeys(true) )
             {
                 XConomy.Console.write( "Bankaccount found-> " + BankAccount );
             }
             
-            XConomy.BankManager.PayFees();
+            XConomy.DateManager.Test();
 
             player.sendMessage( XConomy.ChatPrefix() + "§2Please check console for test-report" );
             

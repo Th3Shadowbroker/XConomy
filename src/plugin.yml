@@ -21,3 +21,8 @@ commands:
         permission: XConomy.user
         usage: /pay <Player> <Amount>
         aliases: [transfer, trans]
+    atm:
+        description: Open your personal mobile-atm interface
+        permission: XConomy.atm
+        usage: /atm
+        aliases: []
