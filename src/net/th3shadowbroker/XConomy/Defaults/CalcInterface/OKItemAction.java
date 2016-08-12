@@ -26,6 +26,11 @@ public class OKItemAction extends GUIItemExtension
        try{
 
            DefaultCalcInterface CurrentCalcInterface = (DefaultCalcInterface) CurrentInterface;
+     
+           if ( CurrentCalcInterface.GetAmountName().equals( "---" ) )
+           {
+               return;
+           }
            
            //Check type and do the right things
            switch ( CurrentCalcInterface.GetCalcType() )
