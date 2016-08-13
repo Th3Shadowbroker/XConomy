@@ -84,12 +84,12 @@ public class XConRemove extends CommandArgument {
                         {
                             
                             plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.WAIT_DELETION );
-                            player.sendMessage( plugin.ChatPrefix() + "§cRigt-click on the bank you want do remove" );
+                            player.sendMessage( plugin.ChatPrefix() + "§cRigt-click on the bank you want remove" );
                             
                         } else {
                             
                             plugin.getCache().updateCacheEntry( new XConomyPlayer( player ), CacheState.NORMAL );
-                            player.sendMessage( plugin.ChatPrefix() + "§cBank deletion canceled" );
+                            player.sendMessage( plugin.ChatPrefix() + "§cBank deletion cancelled" );
                             
                         }
 
