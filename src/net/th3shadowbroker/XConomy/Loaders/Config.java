@@ -33,6 +33,7 @@ public class Config {
         
         config.addDefault( "ATM.StartAt" , 50000 );
         config.addDefault( "ATM.StepSize" , 10000 );
+        config.addDefault( "ATM.CustomInterface" , "None" );
         
         config.addDefault( "ConsolePrefix" , "[XConomy]" );
         config.addDefault( "ChatPrefix" , "&9[&eX&9Conomy]" );

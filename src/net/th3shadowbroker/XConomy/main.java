@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy;
 
 import java.io.File;
 import net.th3shadowbroker.XConomy.ATM.Objects.ATMConfig;
+import net.th3shadowbroker.XConomy.Addons.CustomInterfaceManager;
 import net.th3shadowbroker.XConomy.Addons.OverrideManager;
 import net.th3shadowbroker.XConomy.Bank.Bank;
 import net.th3shadowbroker.XConomy.Bank.FeeManager;
@@ -62,6 +63,9 @@ public class main extends JavaPlugin {
     //Register XConomy a global economy system
     public VaultHook VaultHook;
     
+    //Manages custom ATM-Interfaces
+    public CustomInterfaceManager CustomInterfaces;
+    
     //Manages time differences
     public DateDifferenceManager DateManager;
     
@@ -98,6 +102,7 @@ public class main extends JavaPlugin {
         BankManager = new Bank( this, new File( this.getDataFolder(), "bank.yml" ) );
         DateManager = new DateDifferenceManager( this );
         FeePayement = new FeeManager();
+        CustomInterfaces = new CustomInterfaceManager( this );
           
         Console.write( "Loading ATM's..." );
         ATMConfig = new ATMConfig( this , "ATM" );

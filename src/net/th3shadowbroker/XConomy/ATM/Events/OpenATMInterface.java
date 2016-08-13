@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.ATM.Events;
 
+import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Events;
@@ -49,10 +50,36 @@ public class OpenATMInterface implements Listener
                 
                 if ( plugin.ATMConfig.ATMExists( cBlock ) )
                 {
-
-                        DefaultATMInterface test = new DefaultATMInterface(p);
-                        GUIItemBlocker testBlocker = new GUIItemBlocker( this.loader, test );
-                        test.OpenTo( p , true );
+                        //Check for custom interface
+                        if ( plugin.CustomInterfaces.UseCustomIntefaces() )
+                        {
+                            //If interface really exist
+                            if ( plugin.CustomInterfaces.GetInterface() != null )
+                            {
+                                
+                                //Load custom interface
+                                ATMInterface CustomInterface = plugin.CustomInterfaces.GetInterface();
+                                GUIItemBlocker CustomInterfaceBlocker = new GUIItemBlocker( this.loader, CustomInterface );
+                                CustomInterface.OpenTo( p, true );
+                                
+                            } else {
+                               
+                                //Ship happens
+                                DefaultATMInterface defaultInterface = new DefaultATMInterface(p);
+                                GUIItemBlocker defaultInterfaceBlocker = new GUIItemBlocker( this.loader, defaultInterface );
+                                defaultInterface.OpenTo( p , true );
+                                
+                            }
+                            
+                            
+                        //If custom interfaces are disabled
+                        } else {
+                            
+                            DefaultATMInterface defaultInterface = new DefaultATMInterface(p);
+                            GUIItemBlocker defaultInterfaceBlocker = new GUIItemBlocker( this.loader, defaultInterface );
+                            defaultInterface.OpenTo( p , true );
+                            
+                        }
  
                 }
                             

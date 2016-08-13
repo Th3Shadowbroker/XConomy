@@ -1,5 +1,6 @@
 package net.th3shadowbroker.XConomy.Commands;
 
+import net.th3shadowbroker.XConomy.Blueprints.ATMInterface;
 import net.th3shadowbroker.XConomy.Defaults.DefaultATMInterface;
 import net.th3shadowbroker.XConomy.GUI.GUIItemBlocker;
 import net.th3shadowbroker.XConomy.Loaders.Commands;
@@ -38,11 +39,39 @@ public class AtmCommand implements CommandExecutor
                 if ( p.hasPermission( Permissions.GetPermission( XConomyPermission.ATM ) ) )
                 {
                     
-                    DefaultATMInterface MobileInterface = new DefaultATMInterface( p );
-                    GUIItemBlocker MobileInterfaceBlocker = new GUIItemBlocker( Events.getLoaderInstance(), MobileInterface );
-                    MobileInterface.OpenTo( p, true );
-                    return true;
-                    
+                    //Check for custom interface
+                    if ( XConomy.CustomInterfaces.UseCustomIntefaces() )
+                        {
+                            //If interface really exist
+                            if ( XConomy.CustomInterfaces.GetInterface() != null )
+                            {
+                                
+                                ATMInterface CustomInterface = XConomy.CustomInterfaces.GetInterface();
+                                GUIItemBlocker CustomInterfaceBlocker = new GUIItemBlocker( Events.getLoaderInstance(), CustomInterface );
+                                CustomInterface.OpenTo( p, true );
+                                return true;
+                             
+                            //Shit happens
+                            } else {
+                               
+                                DefaultATMInterface defaultInterface = new DefaultATMInterface(p);
+                                GUIItemBlocker defaultInterfaceBlocker = new GUIItemBlocker( Events.getLoaderInstance(), defaultInterface );
+                                defaultInterface.OpenTo( p , true );
+                                return true;
+                                
+                            }
+                            
+                            
+                        //If custom interfaces are disabled
+                        } else {
+                            
+                            DefaultATMInterface defaultInterface = new DefaultATMInterface(p);
+                            GUIItemBlocker defaultInterfaceBlocker = new GUIItemBlocker( Events.getLoaderInstance(), defaultInterface );
+                            defaultInterface.OpenTo( p , true );
+                            return true;
+                            
+                        }
+
                 } else {
                     
                     p.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemATMCommandNotAllowed" ) );
