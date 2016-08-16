@@ -2,7 +2,6 @@ package net.th3shadowbroker.Thirdparty.Citizens.Objects;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
