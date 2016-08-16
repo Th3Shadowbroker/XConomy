@@ -75,6 +75,11 @@ public class Messages {
         lang.setTextOnce( "SystemPlayerSearchingDatabase" , "&2Please wait... searching database..." );
         lang.setTextOnce( "SystemPayCmdDenied" , "&cUse an ATM to transfer money to others" );
         lang.setTextOnce( "SystemAbortNotice" , "&eUse &c# &eto cancel" );
+        
+        //Thirdparty messages
+        lang.setTextOnce( "SystemNPCCreate" , "&2NPC-Bank created" );
+        lang.setTextOnce( "SystemNPCRemove" , "&cNPC-Bank removed" );
+        lang.setTextOnce( "SystemNPCExists" , "&cNPC-Bank already exists" );
  
     }
     

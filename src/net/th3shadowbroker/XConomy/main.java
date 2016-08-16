@@ -13,6 +13,7 @@ import net.th3shadowbroker.XConomy.Loaders.Config;
 import net.th3shadowbroker.XConomy.Loaders.Events;
 import net.th3shadowbroker.XConomy.Loaders.Imports;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
+import net.th3shadowbroker.XConomy.Loaders.Thirdparty;
 import net.th3shadowbroker.XConomy.Objects.DateDifferenceManager;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.System.Console;
@@ -112,6 +113,9 @@ public class main extends JavaPlugin {
         
         Console.write( "Checking for economy imports..." );
         Imports EconomyImports = new Imports( this );
+        
+        Console.write( "Checking for thirdparty-plugins..." );
+        setupThirdparty();
    
         Console.write( "Everything done !" );
         
@@ -177,6 +181,14 @@ public class main extends JavaPlugin {
         
     }
 
+    //Setup thirdparty-plugins
+    private void setupThirdparty()
+    {
+        
+        Thirdparty thirdparty = new Thirdparty( this );
+        
+    }
+    
     //Setup vault
     private void setupService()
     {
