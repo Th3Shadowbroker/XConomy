@@ -74,6 +74,7 @@ public class Messages {
         lang.setTextOnce( "SystemATMCommandNotAllowed" , "&eYou are not allowed to use mobile ATM's" );
         lang.setTextOnce( "SystemPlayerSearchingDatabase" , "&2Please wait... searching database..." );
         lang.setTextOnce( "SystemPayCmdDenied" , "&cUse an ATM to transfer money to others" );
+        lang.setTextOnce( "SystemAbortNotice" , "&eUse &c# &eto cancel" );
  
     }
     

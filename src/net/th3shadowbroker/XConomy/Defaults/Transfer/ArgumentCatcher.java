@@ -80,7 +80,7 @@ public class ArgumentCatcher implements Listener
                 } catch ( Exception ex ) {
                     
                     Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.TargetNotFound" ) );
-                    XConomy.Console.write( ex.getMessage() );
+                    Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "SystemAbortNotice" ) );
   
                 }
                 
