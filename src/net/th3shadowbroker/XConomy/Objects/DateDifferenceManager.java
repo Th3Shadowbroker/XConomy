@@ -14,6 +14,7 @@ public class DateDifferenceManager
     private final File ConfigFile;
     private final FileConfiguration Config;
     private final main XConomy;
+    private int TMP;
 
     //Construction
     public DateDifferenceManager( main Plugin )
@@ -22,36 +23,55 @@ public class DateDifferenceManager
         this.ConfigFile = new File( XConomy.getDataFolder(), "timesave.tmp" );
         this.Config = YamlConfiguration.loadConfiguration( ConfigFile );
         this.Setup();
-        this.Save();
     }
     
     //Setup on construction
     private void Setup()
     {
         
-        Config.options().header( "DO NOT ACCESS THIS FILE WHILE XCONOMY IS RUNNING\nIT WILL BE TO FAST FOR YOU" );
+        Config.options().header( "DONT CHANGE ANYTHING OR THE FEE-TIMER WILL RESET" );
         
-        Config.addDefault( "FeesLastPayed", 0 );
+        Config.addDefault( "FeesLastPaid", 0 );
         
         Config.options().copyDefaults( true );
         
         this.Save();
         
+        this.TMP = GetCurrentRestorePoint();
+        
     }
     
-    //Get current state
+    //Get current state (from restore-point)
+    public int GetCurrentRestorePoint()
+    {
+        
+        return Config.getInt( "FeesLastPaid" );
+        
+    }
+    
+    //Get current state (from runtime)
     public int GetCurrent()
     {
-        return Config.getInt( "FeesLastPayed" );
+        
+        return this.TMP;
+        
+    }
+    
+    //Create restore point
+    public void CreateRestorePoint()
+    {
+        
+        Config.set( "FeesLastPaid" , TMP );
+        
+        this.Save();
+        
     }
 
     //Send a down
     public void SendDown()
     {
         
-        int LastState = Config.getInt( "FeesLastPayed" );
-        
-        Config.set( "FeesLastPayed" , LastState - 1 );
+        this.TMP -= 1;
         
         this.Save();
         
@@ -60,7 +80,7 @@ public class DateDifferenceManager
     //Test command
     public void Test()
     {
-        Config.set( "FeesLastPayed" , 3 );
+        this.TMP = 3;
         
         this.Save();
     }
@@ -69,7 +89,10 @@ public class DateDifferenceManager
     public void Reset()
     {
         
-        Config.set( "FeesLastPayed" , XConomy.Config.getInt( "Bank.FeeDelay" ) );
+        Config.set( "FeesLastPaid" , XConomy.Config.getInt( "Bank.FeeDelay" ) );
+        
+        this.TMP = XConomy.Config.getInt( "Bank.FeeDelay" );
+        
         this.Save();
         
     }

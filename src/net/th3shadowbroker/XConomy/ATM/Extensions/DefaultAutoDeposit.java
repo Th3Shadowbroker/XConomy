@@ -24,7 +24,7 @@ public class DefaultAutoDeposit extends GUIItemExtension
             String FilteredName = CurrentItem.getName().replaceAll( UnfilteredName , "");
             
             XConomy.BankManager.Deposit( Player , Double.parseDouble( FilteredName ) );
-
+            
             Player.closeInventory();
             
     }

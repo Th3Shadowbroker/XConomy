@@ -90,7 +90,7 @@ public class DefaultATMInterface extends ATMInterface
             GUIItemStack CustomWithdrawItem = new GUIItemStack( Material.FEATHER, XConomy.lang.getText( "ATMItemCustomWithdraw" ), null , 1, 26 ); Elements.add( CustomWithdrawItem );
             GUIItemAction CustomWithdrawAction = new GUIItemAction( CustomWithdrawItem, this, new DefaultCustomWithdraw() );
 
-            int WDCounter = XConomy.Config.getInt( "ATM.StartAt" );;
+            int WDCounter = XConomy.Config.getInt( "ATM.StartAt" );
 
             for ( int i = 20; i != 26; i++ )
             {

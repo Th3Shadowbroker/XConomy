@@ -29,7 +29,7 @@ public class FeeManager
                 //Manage resetting
                 if ( XConomy.DateManager.GetCurrent() <= 0 )
                 {
-                    XConomy.Console.write( "Resettings fee-timer" );
+                    XConomy.Console.write( "Resetting fee-timer" );
                     /*   Pay feed to everybody   */ XConomy.BankManager.PayFees();
                     /*   Reset counter   */         XConomy.DateManager.Reset();
 

@@ -1,6 +1,5 @@
 package net.th3shadowbroker.XConomy.Import;
 
-import com.earth2me.essentials.Essentials;
 import java.io.File;
 import java.util.UUID;
 import net.th3shadowbroker.XConomy.Blueprints.EconomyImport;
@@ -50,6 +49,7 @@ public class Essentials_Import extends EconomyImport
                             
                             //Set new amount to XConomy-Account
                             Account.setByOverride( AccountID, Double.parseDouble( AccountFile.getString( "money" ) ) );
+                            XConomy.BankManager.CreateBankAccount( AccountID );
                             
                             //It's done!
                             XConomy.Console.write( AccountID.toString() + " imported from EssentialsEconomy" );

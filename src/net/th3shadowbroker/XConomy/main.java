@@ -128,7 +128,7 @@ public class main extends JavaPlugin {
         
         saveConfig();
 
-        DateManager.Save();
+        DateManager.CreateRestorePoint();
         
         Console.write( "Killing remaining listeners..." );
         

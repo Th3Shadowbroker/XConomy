@@ -39,14 +39,14 @@ public class OKItemAction extends GUIItemExtension
                case DEPOSIT:
                    
                    XConomy.BankManager.Deposit( Player , DoubleFormatter.Format( CurrentCalcInterface.GetAmount() ) );
-                   
-                break;
+                   Player.sendMessage( "T1S1" );
+                   break;
                    
                case WITHDRAW:
                    
                    XConomy.BankManager.Withdraw( Player , DoubleFormatter.Format( CurrentCalcInterface.GetAmount() ) );
-                   
-                break;
+                   Player.sendMessage( "T2S1" );                  
+                   break;
                    
                case TRANSFER:
                
@@ -54,8 +54,9 @@ public class OKItemAction extends GUIItemExtension
                    XConomy.getCache().updateCacheEntry( new XConomyPlayer( Player ) , CacheState.WAIT_TRANSFER_NAME );
 
                    Player.sendMessage( XConomy.ChatPrefix() + XConomy.lang.getText( "Transfer.TypeTarget" ) );
+
+                   break;
                    
-                break;
            }
            
            Player.closeInventory();

@@ -2,6 +2,7 @@ package net.th3shadowbroker.XConomy.Bank;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 import net.th3shadowbroker.XConomy.Exceptions.InvalidAmountException;
 import net.th3shadowbroker.XConomy.Exceptions.NotEnoughMoneyException;
 import net.th3shadowbroker.XConomy.Objects.Account;
@@ -48,12 +49,32 @@ public class Bank
         }
     }
     
+    //Create bank account with uuid
+    public void CreateBankAccount( UUID uuid )
+    {
+        try {
+            
+            if ( Bank.getString( uuid.toString() ) == null )
+            {
+                
+                Bank.set( uuid.toString() , XConomy.Config.getDouble( "StartBankWith" ) );
+                Save();
+            
+            }
+            
+        } catch ( Exception ex ) {
+            
+            XConomy.Console.write( ex.getMessage() );
+            
+        }
+    }
+    
     //Add some money
     public void Deposit( Player p, double amount )
     {
         if ( Bank.getString( p.getUniqueId().toString() ) != null )
         {
-            
+
             Account TargetAccount = new Account( XConomy, p ); 
 
             try 
@@ -68,6 +89,7 @@ public class Bank
                                                       .replaceAll( "%AMOUNT%" , String.valueOf( DoubleFormatter.Format( amount ) ) )
                                                       .replaceAll( "%SHORTNAME%" , XConomy.Config.getString( "Currency.Shortname" ) )
                 );
+
                 
             } catch (NotEnoughMoneyException ex) {
                 
