@@ -69,27 +69,21 @@ public class GUIItemAction implements Listener {
             {
                 
                     //Check for developer-setting
-                    if ( XConomy.Config.getString( "DebugMode" ) != null )
-                    {
-                        if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                        if ( XConomy.Debugger.PostDebug() )
                         {
                             XConomy.Console.write( "DEBUG//EVENT//HANDLED_EXCEPTION> GUI-Action " + Item.getName() + " already exist. Registration cancelled." );
                         }
-                    }
-                
+
                 return  false;
                 
             }
          }
 
                     //Check for developer-setting
-                    if ( XConomy.Config.getString( "DebugMode" ) != null )
-                    {
-                        if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                        if ( XConomy.Debugger.PostDebug() )
                         {
                             XConomy.Console.write( "DEBUG//EVENT//HANDLED_EXCEPTION> GUI-Action " + Item.getName() + " does not exist. Registration successfull." );
                         }
-                    }
         
         return true;
                              
@@ -124,13 +118,10 @@ public class GUIItemAction implements Listener {
                 }
                 
                 //Check for developer-setting
-                if ( XConomy.Config.getString( "DebugMode" ) != null )
-                {
-                    if ( XConomy.Config.getBoolean( "DebugMode" ) )
+                    if ( XConomy.Debugger.PostDebug() )
                     {
                         XConomy.Console.write( "DEBUG//EVENT> " + Item.getName() );
                     }
-                }
                     
             }
         }

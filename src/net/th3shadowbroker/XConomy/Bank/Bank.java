@@ -232,7 +232,10 @@ public class Bank
             if( BankAccount != null )
             {
                 
-                XConomy.Console.write( "Paying fees to " + BankAccount );
+                if ( XConomy.Debugger.PostDebug() )
+                {
+                    XConomy.Console.write( "Paying fees to " + BankAccount );
+                }
                 
                 if ( GetBalance( BankAccount ) <= 1000 )                //1.000
                 {

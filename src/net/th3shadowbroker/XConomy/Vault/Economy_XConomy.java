@@ -49,7 +49,9 @@ public class Economy_XConomy implements Economy
 
     @Override
     public String format(double d) {
+        
        return String.valueOf( DoubleFormatter.Format(d) );
+       
     }
 
     @Override

@@ -15,6 +15,7 @@ import net.th3shadowbroker.XConomy.Loaders.Imports;
 import net.th3shadowbroker.XConomy.Loaders.Messages;
 import net.th3shadowbroker.XConomy.Loaders.Thirdparty;
 import net.th3shadowbroker.XConomy.Objects.DateDifferenceManager;
+import net.th3shadowbroker.XConomy.Objects.DevTool;
 import net.th3shadowbroker.XConomy.Objects.Language;
 import net.th3shadowbroker.XConomy.System.Console;
 import net.th3shadowbroker.XConomy.System.LogFile;
@@ -70,6 +71,9 @@ public class main extends JavaPlugin {
     //Manages time differences
     public DateDifferenceManager DateManager;
     
+    //Dev-tool (ONLY FOR DEVS!)
+    public DevTool Debugger;
+    
     //Load it up
     @Override
     public void onEnable()
@@ -80,6 +84,7 @@ public class main extends JavaPlugin {
         
         Console.write( "Initializing null variables..." );
         TransferQueue = new TransferQueue();
+        Debugger = new DevTool( this );
         
         Console.write( "Loading config..." );
         Config = getConfig();
