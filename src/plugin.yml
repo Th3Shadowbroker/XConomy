@@ -2,7 +2,7 @@ name: XConomy
 main: net.th3shadowbroker.XConomy.main
 author: Th3Shadowbroker
 version: 1.0.0
-softdepend: [Vault,Citizens]
+softdepend: [Vault,Citizens,Essentials]
 website: http://crafter629.de
 
 commands:

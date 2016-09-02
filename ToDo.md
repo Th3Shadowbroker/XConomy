@@ -1,11 +1,11 @@
 XConomy:
 - [x] ATM-Command
-- [x] Komma button (Exceptions abfangen)
-- [x] OK (Exceptions abfangen wenn betrag 0)
-- [x] 0-Taste (Stack-Size auf 0)
-- [ ] Überweisung an nicht existente Spieler abbrechen
-- [x] Bank right-click message korrektur
-- [x] Bank deletion command: Usage posten
-
-ANCIENT:
-- [x] Deimplemtierung des Menutests
+- [x] Comma button (catch exceptions)
+- [x] OK (catch npex)
+- [x] 0-Taste (Stack-Size to 0)
+- [x] Cancel transactions with unknown players as target
+- [x] Bank right-click message correction
+- [x] Bank deletion command: post usage
+- [ ] Essentials timeout override if required
+- [ ] Show names on import
+- [ ] Update/Finish Essentials thirdparty support
